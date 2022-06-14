@@ -1,0 +1,19 @@
+[
+  {
+	"modid": "mcbarpg",
+	"name": "Mcbarpg",
+	"description": "An RPG take on minecraft",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+	"url": "",
+	"updateUrl": "",
+	"authorList": [
+	  "Jubiman",
+	  "Sybsuper"
+	],
+	"credits": "",
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
+  }
+]

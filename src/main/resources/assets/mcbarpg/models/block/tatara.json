@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"north": "mcbarpg:block/tatara/tatara",
+		"south": "mcbarpg:block/tatara/tatara",
+		"west": "mcbarpg:block/tatara/tatara",
+		"east": "mcbarpg:block/tatara/tatara",
+		"down": "mcbarpg:block/tatara/tatara_bottom",
+		"up": "mcbarpg:block/tatara/tatara_top",
+		"particle": "mcbarpg:block/tatara/tatara"
+	}
+}
