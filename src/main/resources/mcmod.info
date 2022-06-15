@@ -1,8 +1,14 @@
 [
   {
+<<<<<<< HEAD
 	"modid": "mcbarpg",
 	"name": "Mcbarpg",
 	"description": "An RPG take on minecraft",
+=======
+	"modid": "carpetbag",
+	"name": "Carpetbag",
+	"description": "An RPG take on minecraft. And just carpetbag",
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
 	"version": "${version}",
 	"mcversion": "${mcversion}",
 	"url": "",

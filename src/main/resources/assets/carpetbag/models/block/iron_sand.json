@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "carpetbag:block/iron_sand"
+	}
+}

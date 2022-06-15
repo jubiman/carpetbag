@@ -1,5 +1,6 @@
 package us.jusybiberman.carpetbag.item;
 
+import net.minecraft.init.Items;
 import us.jusybiberman.carpetbag.Mcbarpg;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -37,7 +38,7 @@ public class MCBARPGTab extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public @Nonnull ItemStack createIcon() {
-		return new ItemStack(itemEnderface.getItemNN(), 1, meta);
+		return new ItemStack(Items.STONE_AXE, 1, meta);
 	}
 	/*public static final CreativeTabs WEAPONS = new CreativeTabs("mcbammorpg:weapons") {
 		@SideOnly(Side.CLIENT)

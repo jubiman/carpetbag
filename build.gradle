@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
@@ -16,12 +17,25 @@ version = '1.0-SNAPSHOT'
 
 java {
     archivesBaseName = 'mcbarpg'
+=======
+plugins {
+    id 'net.minecraftforge.gradle' version '5.1.+'
+}
+
+
+group = 'us.jusybiberman'
+version = '1.0-SNAPSHOT'
+
+java {
+    archivesBaseName = 'carpetbag'
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
     toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
     // Channel:   Version:
+<<<<<<< HEAD
     // snapshot   YYYYMMDD   Snapshot are built nightly.
     // stable     #          Stables are built at the discretion of the MCP team.
     // official   MCVersion  Official field/method names from Mojang mapping files
@@ -29,6 +43,17 @@ minecraft {
     // You must be aware of the Mojang license when using the 'official' mappings.
     // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
     //
+=======
+    // official   MCVersion             Official field/method names from Mojang mapping files
+    // parchment  YYYY.MM.DD-MCVersion  Open community-sourced parameter names and javadocs layered on top of official
+    //
+    // You must be aware of the Mojang license when using the 'official' or 'parchment' mappings.
+    // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+    //
+    // Parchment is an unofficial project maintained by ParchmentMC, separate from MinecraftForge
+    // Additional setup is needed to use their mappings: https://github.com/ParchmentMC/Parchment/wiki/Getting-Started
+    //
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
     // Use non-default mappings at your own risk. They may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
     mappings channel: 'stable', version: '39-1.12'
@@ -42,12 +67,20 @@ minecraft {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
+<<<<<<< HEAD
             // The markers can be added/removed as needed separated by commas.
+=======
+            // The markers can be added/remove as needed separated by commas.
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
             // "SCAN": For mods scan.
             // "REGISTRIES": For firing of registry events.
             // "REGISTRYDUMP": For getting the contents of all registries.
             property 'forge.logging.markers', 'REGISTRIES'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
@@ -55,7 +88,11 @@ minecraft {
 
 
             mods {
+<<<<<<< HEAD
                 mcbarpg {
+=======
+                carpetbag {
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
                     source sourceSets.main
                 }
             }
@@ -64,6 +101,7 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
+<<<<<<< HEAD
             // Recommended logging data for a userdev environment
             // The markers can be added/removed as needed separated by commas.
             // "SCAN": For mods scan.
@@ -74,11 +112,19 @@ minecraft {
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+=======
+            property 'forge.logging.markers', 'REGISTRIES'
+
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
             property 'forge.logging.console.level', 'debug'
 
 
             mods {
+<<<<<<< HEAD
                 mcbarpg {
+=======
+                carpetbag {
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
                     source sourceSets.main
                 }
             }
@@ -122,7 +168,11 @@ dependencies {
 jar {
     manifest {
         attributes([
+<<<<<<< HEAD
                 "Specification-Title"     : "mcbarpg",
+=======
+                "Specification-Title"     : "carpetbag",
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98
                 "Specification-Vendor"    : "Jubiman, Sybsuper",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
@@ -134,3 +184,10 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+<<<<<<< HEAD
+=======
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+>>>>>>> 5acb3854655ab11c6d9c2c64bfe9be02b965aa98

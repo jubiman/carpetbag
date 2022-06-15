@@ -1,0 +1,14 @@
+﻿#PARSE_ESCAPES
+
+# items
+item.onimaru_kunitsuna.name=Onimaru Kunitsuna
+item.tamahagane_ingot.name=Tamahagane Ingot
+
+# blocks
+block.iron_sand.name=Iron Sand
+
+# CreativeTabs
+itemGroup.carpetbag.main=Carpetbag
+itemGroup.carpetbag.materials=Materials
+itemGroup.carpetbag.items=Items
+itemGroup.carpetbag.machines=Machines
