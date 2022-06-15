@@ -1,0 +1,19 @@
+[
+  {
+	"modid": "carpetbag",
+	"name": "Carpetbag",
+	"description": "An RPG take on minecraft. And just carpetbag",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+	"url": "",
+	"updateUrl": "",
+	"authorList": [
+	  "Jubiman",
+	  "Sybsuper"
+	],
+	"credits": "",
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
+  }
+]
