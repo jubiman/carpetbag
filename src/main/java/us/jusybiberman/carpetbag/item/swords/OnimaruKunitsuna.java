@@ -1,13 +1,8 @@
 package us.jusybiberman.carpetbag.item.swords;
 
+import net.minecraft.item.ItemSword;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.material.Materials;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.util.NonNullList;
-
-import javax.annotation.Nonnull;
 
 import static us.jusybiberman.carpetbag.Carpetbag.MOD_ID;
 
