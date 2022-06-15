@@ -1,11 +1,11 @@
 package us.jusybiberman.carpetbag.item;
 
-import net.minecraft.init.Items;
-import us.jusybiberman.carpetbag.Carpetbag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import us.jusybiberman.carpetbag.Carpetbag;
 
 import javax.annotation.Nonnull;
 
