@@ -6,11 +6,9 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.Objects;
 
-public class ClientProxy extends CommonProxy {
-	@Override
+public class CommonProxy {
 	public Item registerModel(Item item, int metadata)
 	{
-		ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
-		return item;
+		return null;
 	}
 }

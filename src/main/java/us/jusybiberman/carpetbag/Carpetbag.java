@@ -3,12 +3,19 @@ package us.jusybiberman.carpetbag;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,9 +23,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.jusybiberman.carpetbag.block.BlockIronSand;
+import us.jusybiberman.carpetbag.commands.CommandSkillExp;
+import us.jusybiberman.carpetbag.commands.debug.CommandCarpetbagData;
+import us.jusybiberman.carpetbag.events.PlayerJoinEvent;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.item.swords.OnimaruKunitsuna;
+import us.jusybiberman.carpetbag.material.Materials;
 import us.jusybiberman.carpetbag.proxy.ClientProxy;
+import us.jusybiberman.carpetbag.proxy.CommonProxy;
+import us.jusybiberman.carpetbag.skills.SkillMining;
 
 @Mod(
 		modid = Carpetbag.MOD_ID,
@@ -36,12 +49,14 @@ public class Carpetbag {
 	 */
 	@Mod.Instance(MOD_ID)
 	public static Carpetbag INSTANCE;
+	//@SideOnly(Side.SERVER)
+	public static MinecraftServer SERVER_INSTANCE;
 
 	public static Logger getLogger() {
 		return LOGGER;
 	}
-	@SideOnly(Side.CLIENT)
-	public static ClientProxy proxy;
+	@SidedProxy(clientSide = "us.jusybiberman.carpetbag.proxy.ClientProxy", serverSide = "us.jusybiberman.carpetbag.proxy.CommonProxy")
+	public static CommonProxy proxy;
 
 
 	/**
@@ -51,7 +66,6 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		getLogger().debug("PRE INIT");
-		proxy = new ClientProxy();
 	}
 
 	/**
@@ -68,8 +82,21 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void postinit(FMLPostInitializationEvent event) {
 		//getLogger().debug("FINISHED LOADING THIS PIECE OF SHIT MOD CALLED CARPETBAG");
-		//Materials.TAMAHAGANE.setRepairItem(new ItemStack(Carpetbag.Items.tamahagane_ingot));
+		Materials.TAMAHAGANE.setRepairItem(new ItemStack(Carpetbag.Items.tamahagane_ingot));
 		getLogger().debug("FINISHED LOADING THIS PIECE OF SHIT MOD CALLED CARPETBAG");
+		registerEventListeners();
+	}
+
+	@Mod.EventHandler
+	public void serverInit(FMLServerStartingEvent event) {
+		SERVER_INSTANCE = event.getServer();
+		event.registerServerCommand(new CommandSkillExp());
+		event.registerServerCommand(new CommandCarpetbagData());
+	}
+
+	private static void registerEventListeners() {
+		MinecraftForge.EVENT_BUS.register(SkillMining.class);
+		MinecraftForge.EVENT_BUS.register(PlayerJoinEvent.class);
 	}
 
 	/**
