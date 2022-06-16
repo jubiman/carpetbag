@@ -12,6 +12,7 @@ public class BlockIronSand extends Block {
 	public BlockIronSand() {
 		super(Material.SAND, MapColor.SAND);
 		setRegistryName(MOD_ID, "iron_sand");
+		setTranslationKey("iron_sand");
 		setCreativeTab(CarpetbagTab.tabCarpetbagMaterials);
 		setSoundType(SoundType.SAND);
 	}
