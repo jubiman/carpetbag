@@ -3,6 +3,9 @@
 # items
 item.onimaru_kunitsuna.name=Onimaru Kunitsuna
 item.tamahagane_ingot.name=Tamahagane Ingot
+item.akame_satetsu.name=Akame Satetsu
+item.masa_satetsu.name=Masa Satetsu
+item.iron_sand.name=Iron Sand
 
 # blocks
 block.iron_sand.name=Iron Sand
@@ -12,3 +15,6 @@ itemGroup.carpetbag.main=Carpetbag
 itemGroup.carpetbag.materials=Materials
 itemGroup.carpetbag.items=Items
 itemGroup.carpetbag.machines=Machines
+
+# Tiles
+tile.iron_sand.name=Iron Sand

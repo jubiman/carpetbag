@@ -3,6 +3,7 @@ package us.jusybiberman.carpetbag;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -10,11 +11,14 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.jusybiberman.carpetbag.block.BlockIronSand;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.item.swords.OnimaruKunitsuna;
+import us.jusybiberman.carpetbag.proxy.ClientProxy;
 
 @Mod(
 		modid = Carpetbag.MOD_ID,
@@ -36,6 +40,9 @@ public class Carpetbag {
 	public static Logger getLogger() {
 		return LOGGER;
 	}
+	@SideOnly(Side.CLIENT)
+	public static ClientProxy proxy;
+
 
 	/**
 	 * This is the first initialization event. Register tile entities here.
@@ -44,6 +51,7 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		getLogger().debug("PRE INIT");
+		proxy = new ClientProxy();
 	}
 
 	/**
@@ -70,6 +78,7 @@ public class Carpetbag {
 	 */
 	@GameRegistry.ObjectHolder(MOD_ID)
 	public static class Blocks {
+		@GameRegistry.ObjectHolder("iron_sand")
 		public static final BlockIronSand iron_sand = null;
       /*
           public static final MySpecialBlock mySpecialBlock = null; // placeholder for special block below
@@ -82,11 +91,16 @@ public class Carpetbag {
 	 */
 	@GameRegistry.ObjectHolder(MOD_ID)
 	public static class Items {
+		@GameRegistry.ObjectHolder("onimaru_kunitsuna")
 		public static final OnimaruKunitsuna onimaru_kunitsuna = new OnimaruKunitsuna();
-		public static final Item tamahagane_ingot = null;
-		public static final Item akame_satetsu = null;
-		public static final Item masa_satetsu = null;
-		public static final ItemBlock iron_sand = null;
+		@GameRegistry.ObjectHolder("tamahagane_ingot")
+		public static final Item tamahagane_ingot = new Item();
+		@GameRegistry.ObjectHolder("akame_satetsu")
+		public static final Item akame_satetsu = new Item();
+		@GameRegistry.ObjectHolder("masa_satetsu")
+		public static final Item masa_satetsu = new Item();
+		@GameRegistry.ObjectHolder("iron_sand")
+		public static final ItemBlock iron_sand = new ItemBlock(Blocks.iron_sand);
       /*
           public static final ItemBlock mySpecialBlock = null; // itemblock for the block above
           public static final MySpecialItem mySpecialItem = null; // placeholder for special item below
@@ -103,13 +117,14 @@ public class Carpetbag {
 		 */
 		@SubscribeEvent
 		public static void addItems(RegistryEvent.Register<Item> event) {
+			getLogger().debug("ADDING ITEMS");
 			event.getRegistry().register(Items.onimaru_kunitsuna);
 
-			event.getRegistry().register(new ItemBlock(Blocks.iron_sand).setRegistryName(MOD_ID, "iron_sand"));
+			event.getRegistry().register(Items.iron_sand.setRegistryName(MOD_ID, "iron_sand").setTranslationKey("iron_sand"));
 
-			event.getRegistry().register(new Item().setRegistryName(MOD_ID, "tamahagane_ingot").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials));
-			event.getRegistry().register(new Item().setRegistryName(MOD_ID, "akame_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials));
-			event.getRegistry().register(new Item().setRegistryName(MOD_ID, "masa_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials));
+			event.getRegistry().register(Items.tamahagane_ingot.setRegistryName(MOD_ID, "tamahagane_ingot").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane_ingot"));
+			event.getRegistry().register(Items.akame_satetsu.setRegistryName(MOD_ID, "akame_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("akame_satetsu"));
+			event.getRegistry().register(Items.masa_satetsu.setRegistryName(MOD_ID, "masa_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("masa_satetsu"));
 
 			/*
              event.getRegistry().register(new ItemBlock(Blocks.myBlock).setRegistryName(MOD_ID, "myBlock"));
@@ -122,11 +137,21 @@ public class Carpetbag {
 		 */
 		@SubscribeEvent
 		public static void addBlocks(RegistryEvent.Register<Block> event) {
+			getLogger().debug("ADDING BLOCKS");
 			//event.getRegistry().register(new Block(Material.SAND, MapColor.SAND).setRegistryName(MOD_ID, "iron_sand").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials));
 			event.getRegistry().register(new BlockIronSand());
            /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */
+		}
+
+		@SubscribeEvent
+		public static void addModels(ModelRegistryEvent event) {
+			proxy.registerModel(Items.onimaru_kunitsuna, 0);
+			proxy.registerModel(Items.iron_sand, 0);
+			proxy.registerModel(Items.akame_satetsu, 0);
+			proxy.registerModel(Items.masa_satetsu, 0);
+			proxy.registerModel(Items.tamahagane_ingot, 0);
 		}
 	}
 }
