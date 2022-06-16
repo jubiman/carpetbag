@@ -2,13 +2,36 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-
-group = 'us.jusybiberman'
+group = 'us.jusybiberman.carpetbag'
 version = '1.0-SNAPSHOT'
 
 java {
     archivesBaseName = 'carpetbag'
     toolchain.languageVersion = JavaLanguageVersion.of(8)
+}
+
+//sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+        }
+        resources {
+            srcDirs = ["src/main/java", "src/main/resources"]
+        }
+    }
+    test {
+        java {
+            srcDirs = ["src/test/java"]
+        }
+        resources {
+            srcDirs = ["src/test/resources"]
+        }
+    }
+
+    // at compile time, put resources in same directories as classes
+    main.output.setResourcesDir(main.java.outputDir)
 }
 
 minecraft {
