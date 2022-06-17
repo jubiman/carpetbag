@@ -329,10 +329,13 @@ public class DungeonManager extends WorldSavedData {
 
 
 	public void createDungeon(List<EntityPlayer> players, World world, DimensionDescriptor descriptor) {
-		// TODO: actually create the dungeon lmao
 		int id = createNewDimension(world, descriptor, "dungeon");
 		for (EntityPlayer p : players)
 			sendPlayerToActiveDungeon(id, p);
+	}
+
+	public void createDungeon(World world, DimensionDescriptor descriptor) {
+		createNewDimension(world, descriptor, "dungeon");
 	}
 
 	// TODO: Throw custom error instead of retuning a string

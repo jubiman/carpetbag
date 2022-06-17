@@ -20,6 +20,8 @@ public class DimensionDescriptor {
         this.forcedSeed = forcedSeed;
 
         StringBuilder s = new StringBuilder();
+        s.append("Dungeon");
+        s.append(descriptors);
 
         // List of all non-modifier dimlets with all associated modifiers.
         //List<Pair<DimletKey,List<DimletKey>>> dimlets = new ArrayList<>();

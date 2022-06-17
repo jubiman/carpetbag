@@ -7,6 +7,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.ChunkGeneratorDebug;
+import net.minecraft.world.gen.ChunkGeneratorFlat;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.DimensionManager;
@@ -99,7 +100,7 @@ public class Dungeon extends WorldProvider {
 	public IChunkGenerator createChunkGenerator()
 	{
 		// TODO: Add dungeon generation
-		return new ChunkGeneratorDebug(world);
+		return new ChunkGeneratorFlat(world, seed, false, null);
 		//return new ChunkGeneratorNetherTemplate(world, true, world.getSeed());
 	}
 

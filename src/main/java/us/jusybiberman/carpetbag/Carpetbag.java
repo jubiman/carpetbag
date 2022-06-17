@@ -23,6 +23,7 @@ import us.jusybiberman.carpetbag.block.BlockIronSand;
 import us.jusybiberman.carpetbag.commands.CommandSkillExp;
 import us.jusybiberman.carpetbag.commands.debug.CommandCarpetbagData;
 import us.jusybiberman.carpetbag.commands.debug.CommandCreateDungeon;
+import us.jusybiberman.carpetbag.commands.debug.CommandDeleteDungeon;
 import us.jusybiberman.carpetbag.dungeons.DungeonManager;
 import us.jusybiberman.carpetbag.dungeons.ModDimensions;
 import us.jusybiberman.carpetbag.events.PlayerJoinEvent;
@@ -100,6 +101,7 @@ public class Carpetbag {
 		event.registerServerCommand(new CommandSkillExp());
 		event.registerServerCommand(new CommandCarpetbagData());
 		event.registerServerCommand(new CommandCreateDungeon());
+		event.registerServerCommand(new CommandDeleteDungeon());
 	}
 
 	@Mod.EventHandler
