@@ -6,6 +6,46 @@ item.tamahagane_ingot.name=Tamahagane Ingot
 item.akame_satetsu.name=Akame Satetsu
 item.masa_satetsu.name=Masa Satetsu
 item.iron_sand.name=Iron Sand
+item.tatara.name=Tatara
+
+# TODO: Add the items to the game lmao (and maybe remove some)
+item.rice.name=Rice
+item.soaked_rice.name=Soaked Rice
+item.rice_stalk.name=Rice Stalk
+item.rice_hay.name=Rice Hay
+item.rice_ash.name=Rice Ash
+item.rush.name=Common Rush
+item.soaked_bamboo.name=Soaked Bamboo
+item.bamboo_slats.name=Bamboo Slats
+item.soaked_mulberry.name=Soaked Mulberry Bark
+item.mulberry_paste.name=Mulberry Pulp
+item.mulberry_sheet.name=Mulberry Sheet
+item.washi.name=Washi
+item.iron_scales.name=Iron Scales
+item.lamellar.name=Lamellar
+item.paper_lamellar.name=Paper Lamellar
+item.tsuka.name=Tsuka
+item.half_katana_blade.name=Half Katana Blade
+item.ya_head.name=Ya Head
+item.yumi_top.name=Yumi Top Parts
+item.yumi_bottom.name=Yumi Bottom Parts
+item.tamahagane.name=Tamahagane
+item.tamahagane_heated.name=Heated Tamahagane
+item.tamahagane_folded.name=Folded Tamahagane
+item.tamahagane_wrapped.name=Wrapped Tamahagane
+item.tamahagane_reheated.name=Reheated Tamahagane
+item.tamahagane_finished.name=Finished Tamahagane
+item.hocho_tetsu.name=Hocho-Tetsu
+item.hocho_tetsu_heated.name=Heated Hocho-Tetsu
+item.hocho_tetsu_fold_1.name=Once-folded Hocho-Tetsu
+item.hocho_tetsu_fold_2.name=Twice-folded Hocho-Tetsu
+item.hocho_tetsu_finished.name=Finished Hocho-Tetsu
+item.helmet_undecorated.name=Undecorated Samurai Helmet
+item.chest_undecorated.name=Undecorated Samurai Chestplate
+item.legs_undecorated.name=Undecorated Samurai Leggings
+item.boots_undecorated.name=Undecorated Samurai Boots
+item.bark_sakura.name=Sakura Bark
+item.bark_mulberry.name=Mulberry Bark
 
 # blocks
 block.iron_sand.name=Iron Sand
@@ -16,5 +56,14 @@ itemGroup.carpetbag.materials=Materials
 itemGroup.carpetbag.items=Items
 itemGroup.carpetbag.machines=Machines
 
-# Tiles
+# tiles
 tile.iron_sand.name=Iron Sand
+tile.tatami.name=Tatami Mat
+tile.tatami_full.name=Recessed Tatami Mat
+tile.tatara.name=Tatara
+
+# inv?
+inv.tatara.name=Tatara
+
+tooltip.tatami_full=Apply a hoe to a tatami mat placed on bamboo slats.
+

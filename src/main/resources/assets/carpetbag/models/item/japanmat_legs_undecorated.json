@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "carpetbag:items/japanmat/legs_undecorated"
+    }
+}

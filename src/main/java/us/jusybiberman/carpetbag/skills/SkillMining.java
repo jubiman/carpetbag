@@ -7,7 +7,6 @@ import us.jusybiberman.carpetbag.Carpetbag;
 public class SkillMining extends SkillBase {
 	@SubscribeEvent
 	public static void onBlockBreak(BlockEvent.BreakEvent event) {
-		Carpetbag.getLogger().debug(event.getState().getBlock().getTranslationKey());
 		switch(event.getState().getBlock().getTranslationKey()) {
 			case "tile.oreDiamond": {
 				addExp(event.getPlayer(), 40, "SkillMining");

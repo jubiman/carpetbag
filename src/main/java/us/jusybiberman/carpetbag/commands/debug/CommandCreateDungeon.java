@@ -32,6 +32,22 @@ public class CommandCreateDungeon extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (args.length < 1) throw new CommandException("Too little arguments. Expected at least 1, got 0.");
+		if (args.length == 1) {
+			List<String> descriptors = new ArrayList<>(); // TODO: temp
+
+
+			DungeonManager dimensionManager = DungeonManager.getDimensionManager(sender.getEntityWorld());
+			DimensionDescriptor descriptor = new DimensionDescriptor(descriptors, Integer.parseInt(args[0]));
+
+			Integer dim = dimensionManager.getDimensionID(descriptor);
+			if(dim != null) {
+				throw new CommandException(TextFormatting.RED + "A dimension with that descriptor already exists: " + dim);
+			}
+
+
+			Carpetbag.DUNGEON_MANAGER.createDungeon(((EntityPlayer)sender).getEntityWorld(), descriptor);
+			dimensionManager.save(sender.getEntityWorld());
+		}
 		if (args.length >= 2) {
 			List<EntityPlayer> p = new ArrayList<>();
 			for (String arg : Arrays.copyOfRange(args, 1, args.length)) {

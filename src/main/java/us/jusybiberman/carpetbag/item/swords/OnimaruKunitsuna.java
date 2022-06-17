@@ -1,7 +1,6 @@
 package us.jusybiberman.carpetbag.item.swords;
 
 import net.minecraft.item.ItemSword;
-import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.material.Materials;
 
@@ -9,7 +8,7 @@ import static us.jusybiberman.carpetbag.Carpetbag.MOD_ID;
 
 public class OnimaruKunitsuna extends ItemSword {
 	public OnimaruKunitsuna() {
-		super(Materials.TAMAHAGANE);
+		super(Materials.tamahaganeToolMaterial);
 		setRegistryName(MOD_ID, "onimaru_kunitsuna");
 		setCreativeTab(CarpetbagTab.tabCarpetbagItems);
 		setTranslationKey("onimaru_kunitsuna");
