@@ -31,6 +31,10 @@ public class ModConfiguration {
 
 	}
 
+	public static Configuration getMainConfig() {
+		return mainConfig;
+	}
+
 	public static void registerConfig(FMLPreInitializationEvent event)
 	{
 		modConfigDir = event.getModConfigurationDirectory();

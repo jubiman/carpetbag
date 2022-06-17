@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+	"model": "cube_bottom_top",
+    "textures": {
+        "bottom": "carpetbag:block/tatara_bottom",
+        "top": "carpetbag:block/tatara_top",
+        "side": "carpetbag:block/tatara"
+    },
+	"transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}
