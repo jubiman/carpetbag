@@ -15,16 +15,24 @@ import static us.jusybiberman.carpetbag.material.Materials.*;
 public class ModItems {
 	@GameRegistry.ObjectHolder("onimaru_kunitsuna")
 	public static final OnimaruKunitsuna onimaru_kunitsuna = new OnimaruKunitsuna();
-	@GameRegistry.ObjectHolder("tamahagane_ingot")
-	public static final Item tamahagane_ingot = new Item();
+
+	@GameRegistry.ObjectHolder("iron_sand")
+	public static final ItemBlock iron_sand = new ItemBlock(ModBlocks.iron_sand);
+	@GameRegistry.ObjectHolder("kera")
+	public static final ItemBlock kera = new ItemBlock(ModBlocks.kera);
+
+	@GameRegistry.ObjectHolder("tamahagane")
+	public static final Item tamahagane = new Item();
+	@GameRegistry.ObjectHolder("hocho_tetsu")
+	public static final Item hocho_tetsu = new Item();
 	@GameRegistry.ObjectHolder("akame_satetsu")
 	public static final Item akame_satetsu = new Item();
 	@GameRegistry.ObjectHolder("masa_satetsu")
 	public static final Item masa_satetsu = new Item();
-	@GameRegistry.ObjectHolder("iron_sand")
-	public static final ItemBlock iron_sand = new ItemBlock(ModBlocks.iron_sand);
+
 	@GameRegistry.ObjectHolder("tatara")
 	public static final ItemBlock tatara = new ItemBlock(ModBlocks.tatara);
+
 	@GameRegistry.ObjectHolder("material_japan")
 	public static ItemMaterial material_japan = new ItemMaterial(
 			new String[]{"rice", "soaked_rice", "rice_stalk", "rice_hay", "rice_ash", "rush",

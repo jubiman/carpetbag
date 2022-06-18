@@ -1,0 +1,5 @@
+{
+  "conditions": {
+    "module": "us.jusybiberman.carpetbag.crafting.conditions.ConditionModule"
+  }
+}

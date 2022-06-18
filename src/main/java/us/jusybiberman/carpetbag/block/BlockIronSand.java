@@ -13,7 +13,10 @@ public class BlockIronSand extends Block {
 		super(Material.SAND, MapColor.SAND);
 		setRegistryName(MOD_ID, "iron_sand");
 		setTranslationKey("iron_sand");
-		setCreativeTab(CarpetbagTab.tabCarpetbagMaterials);
+		setCreativeTab(CarpetbagTab.tabCarpetbag);
 		setSoundType(SoundType.SAND);
+		setHardness(0.7F);
+		setResistance(5.0F);
+		setHarvestLevel("shovel", 0);
 	}
 }

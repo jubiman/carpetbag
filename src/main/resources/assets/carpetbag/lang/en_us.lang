@@ -2,11 +2,23 @@
 
 # items
 item.onimaru_kunitsuna.name=Onimaru Kunitsuna
-item.tamahagane_ingot.name=Tamahagane Ingot
+item.iron_sand.name=Iron Sand
+item.kera.name=Kera
+item.tatara.name=Tatara
+item.tamahagane.name=Tamahagane
+item.tamahagane_heated.name=Heated Tamahagane
+item.tamahagane_folded.name=Folded Tamahagane
+item.tamahagane_wrapped.name=Wrapped Tamahagane
+item.tamahagane_reheated.name=Reheated Tamahagane
+item.tamahagane_finished.name=Finished Tamahagane
+item.hocho_tetsu.name=Hocho-Tetsu
+item.hocho_tetsu_heated.name=Heated Hocho-Tetsu
+item.hocho_tetsu_fold_1.name=Once-folded Hocho-Tetsu
+item.hocho_tetsu_fold_2.name=Twice-folded Hocho-Tetsu
+item.hocho_tetsu_finished.name=Finished Hocho-Tetsu
 item.akame_satetsu.name=Akame Satetsu
 item.masa_satetsu.name=Masa Satetsu
-item.iron_sand.name=Iron Sand
-item.tatara.name=Tatara
+
 
 # TODO: Add the items to the game lmao (and maybe remove some)
 item.rice.name=Rice
@@ -29,17 +41,6 @@ item.half_katana_blade.name=Half Katana Blade
 item.ya_head.name=Ya Head
 item.yumi_top.name=Yumi Top Parts
 item.yumi_bottom.name=Yumi Bottom Parts
-item.tamahagane.name=Tamahagane
-item.tamahagane_heated.name=Heated Tamahagane
-item.tamahagane_folded.name=Folded Tamahagane
-item.tamahagane_wrapped.name=Wrapped Tamahagane
-item.tamahagane_reheated.name=Reheated Tamahagane
-item.tamahagane_finished.name=Finished Tamahagane
-item.hocho_tetsu.name=Hocho-Tetsu
-item.hocho_tetsu_heated.name=Heated Hocho-Tetsu
-item.hocho_tetsu_fold_1.name=Once-folded Hocho-Tetsu
-item.hocho_tetsu_fold_2.name=Twice-folded Hocho-Tetsu
-item.hocho_tetsu_finished.name=Finished Hocho-Tetsu
 item.helmet_undecorated.name=Undecorated Samurai Helmet
 item.chest_undecorated.name=Undecorated Samurai Chestplate
 item.legs_undecorated.name=Undecorated Samurai Leggings
@@ -61,9 +62,9 @@ tile.iron_sand.name=Iron Sand
 tile.tatami.name=Tatami Mat
 tile.tatami_full.name=Recessed Tatami Mat
 tile.tatara.name=Tatara
+tile.kera.name=Kera
 
 # inv?
 inv.tatara.name=Tatara
 
 tooltip.tatami_full=Apply a hoe to a tatami mat placed on bamboo slats.
-
