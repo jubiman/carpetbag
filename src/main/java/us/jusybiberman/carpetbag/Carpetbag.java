@@ -5,11 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,6 +14,7 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.jusybiberman.carpetbag.block.BlockIronSand;
@@ -30,12 +28,13 @@ import us.jusybiberman.carpetbag.commands.debug.CommandDeleteDungeon;
 import us.jusybiberman.carpetbag.dungeons.DungeonManager;
 import us.jusybiberman.carpetbag.dungeons.ModDimensions;
 import us.jusybiberman.carpetbag.events.PlayerJoinEvent;
+import us.jusybiberman.carpetbag.interaction.ModInteractions;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.item.ModItems;
 import us.jusybiberman.carpetbag.proxy.IProxy;
 import us.jusybiberman.carpetbag.skills.SkillMining;
 import us.jusybiberman.carpetbag.block.tatara.TileEntityTatara;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 import us.jusybiberman.carpetbag.util.Scheduler;
 
 import static us.jusybiberman.carpetbag.material.Materials.*;
@@ -59,7 +58,6 @@ public class Carpetbag {
 	 */
 	@Mod.Instance(MOD_ID)
 	public static Carpetbag INSTANCE;
-	//@SideOnly(Side.SERVER)
 	public static MinecraftServer SERVER_INSTANCE;
 
 	public static Logger getLogger() {
@@ -76,8 +74,12 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		getLogger().debug("PRE INIT");
+		ModInteractions.prePreInit(event);
 		ModConfiguration.init(event);
 		ModDimensions.init();
+
+		ModInteractions.preInit(event);
+		ModInteractions.preInitEnd(event);
 	}
 
 	/**
@@ -90,6 +92,8 @@ public class Carpetbag {
 		registerTileEntities();
 		registerLootTables();
 		registerEventListeners();
+
+		ModInteractions.init(event);
 	}
 
 	/**
@@ -97,7 +101,15 @@ public class Carpetbag {
 	 */
 	@Mod.EventHandler
 	public void postinit(FMLPostInitializationEvent event) {
+		ModInteractions.postInit(event);
+
 		getLogger().debug("FINISHED LOADING THIS PIECE OF SHIT MOD CALLED CARPETBAG");
+	}
+
+	@Mod.EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event)
+	{
+		ModInteractions.loadComplete(event);
 	}
 
 	@Mod.EventHandler
@@ -137,6 +149,11 @@ public class Carpetbag {
 		MinecraftForge.EVENT_BUS.register(PlayerJoinEvent.class);
 	}
 
+	private static void registerOreDicts() {
+		OreDictionary.registerOre("ingotTamahagane", ModItems.tamahagane_finished);
+		OreDictionary.registerOre("ingotHochoTetsu", ModItems.hocho_tetsu_finished);
+	}
+
 	/**
 	 * This is a special class that listens to registry events, to allow creation of mod blocks and items at the proper time.
 	 */
@@ -156,7 +173,14 @@ public class Carpetbag {
 
 			// Materials
 			event.getRegistry().register(ModItems.tamahagane.setRegistryName(MOD_ID, "tamahagane").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane"));
+			event.getRegistry().register(ModItems.tamahagane_heated.setRegistryName(MOD_ID, "tamahagane_heated").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane_heated"));
+			event.getRegistry().register(ModItems.tamahagane_wrapped.setRegistryName(MOD_ID, "tamahagane_wrapped").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane_wrapped"));
+			event.getRegistry().register(ModItems.tamahagane_reheated.setRegistryName(MOD_ID, "tamahagane_reheated").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane_reheated"));
+			event.getRegistry().register(ModItems.tamahagane_finished.setRegistryName(MOD_ID, "tamahagane_finished").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("tamahagane_finished"));
 			event.getRegistry().register(ModItems.hocho_tetsu.setRegistryName(MOD_ID, "hocho_tetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu"));
+			event.getRegistry().register(ModItems.hocho_tetsu_heated.setRegistryName(MOD_ID, "hocho_tetsu_heated").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu_heated"));
+			event.getRegistry().register(ModItems.hocho_tetsu_finished.setRegistryName(MOD_ID, "hocho_tetsu_finished").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu_finished"));
+
 			event.getRegistry().register(ModItems.akame_satetsu.setRegistryName(MOD_ID, "akame_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("akame_satetsu"));
 			event.getRegistry().register(ModItems.masa_satetsu.setRegistryName(MOD_ID, "masa_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("masa_satetsu"));
 
@@ -164,7 +188,7 @@ public class Carpetbag {
 			event.getRegistry().register(ModItems.onimaru_kunitsuna);
 
 			// TODO: Temporary
-			event.getRegistry().register(ModItems.material_japan.setRegistryName(MOD_ID, "material_japan").setTranslationKey("material_japan"));
+			event.getRegistry().register(ModItems.material_japan.setRegistryName(MOD_ID, "material_japan"));
 			tamahaganeToolMaterial.setRepairItem(ModItems.material_japan.getMaterial("tamahagane_finished"));
 			bambooToolMaterial.setRepairItem(ModItems.material_japan.getMaterial("bamboo_slats"));
 			japansteelToolMaterial.setRepairItem(ModItems.material_japan.getMaterial("tamahagane_finished"));

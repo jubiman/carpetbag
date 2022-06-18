@@ -7,7 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import us.jusybiberman.carpetbag.Carpetbag;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

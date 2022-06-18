@@ -8,7 +8,7 @@ import net.minecraftforge.fml.client.config.DummyConfigElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
 import us.jusybiberman.carpetbag.Carpetbag;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;

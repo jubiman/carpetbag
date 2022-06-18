@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "carpetbag:items/japanmat/iron_scales"
+        "layer0": "carpetbag:item/japanmat/iron_scales"
     }
 }

@@ -4,7 +4,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -12,23 +11,21 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import org.apache.commons.io.FileUtils;
-import scala.actors.threadpool.Arrays;
-import us.jusybiberman.carpetbag.dungeons.DimensionInformation;
 import us.jusybiberman.carpetbag.dungeons.DimensionStorage;
 import us.jusybiberman.carpetbag.dungeons.DungeonManager;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CommandDeleteDungeon extends CommandBase {
-	private String[] aliases = {
-			"deldungeon"
-	};
+	private List<String> aliases = Collections.singletonList("deldungeon");
 	@Override
 	public List<String> getAliases() {
-		return Arrays.asList(aliases);
+		return aliases;
 	}
 	@Override
 	public String getName() {

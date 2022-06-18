@@ -5,8 +5,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.biome.BiomeProviderSingle;
-import net.minecraft.world.gen.ChunkGeneratorDebug;
 import net.minecraft.world.gen.ChunkGeneratorFlat;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.storage.WorldInfo;
@@ -14,10 +12,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import us.jusybiberman.carpetbag.Carpetbag;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
 
-import java.io.File;
-import java.util.Objects;
 import java.util.Set;
 
 public class Dungeon extends WorldProvider {

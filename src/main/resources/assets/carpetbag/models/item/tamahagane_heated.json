@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "carpetbag:items/japanmat/tamahagane_heated"
+        "layer0": "carpetbag:item/japanmat/tamahagane_heated"
     }
 }
