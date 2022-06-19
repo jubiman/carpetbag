@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "carpetbag:japanmat",
+	"data": 25,
+	"count": 1
+  },
+  "pattern": [
+	" W ",
+	"WTW",
+	" W "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "T": {
+      "item": "carpetbag:tamahagane_folded"
+    },
+	"W": {
+      "item": "carpetbag:washi"
+    }
+  }
+}

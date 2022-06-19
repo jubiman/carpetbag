@@ -1,0 +1,187 @@
+[
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "HE_PLANKS",
+    "ingredient": [
+      {
+        "ore": "plankWood",
+        "type": "forge:ore_dict"
+      },
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "ore": "plankWood",
+          "type": "forge:ore_dict"
+        },
+        "minitype": "siding"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "HE_SAKURA_SIDING",
+    "ingredient": [
+      {
+        "item": "carpetbag:planks_sakura",
+        "data": 0
+      },
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "item": "carpetbag:planks_sakura",
+          "data": 0
+        },
+        "minitype": "siding"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "HE_SAKURA_MOULDING",
+    "ingredient": [
+      {
+        "item": "carpetbag:planks_sakura",
+        "data": 0
+      },
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "item": "carpetbag:planks_sakura",
+          "data": 0
+        },
+        "minitype": "moulding"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "carpetbag:module",
+        "module": "!GatedAqueducts"
+      }
+    ],
+    "name": "AQUEDUCTFILLER",
+    "ingredient": [
+      {
+        "item": "minecraft:clay"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "carpetbag:module",
+        "module": "GatedAqueducts"
+      }
+    ],
+    "name": "AQUEDUCTFILLER",
+    "ingredient": [
+      {
+        "item": "carpetbag:aqueduct",
+		"data": 3
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "carpetbag:module",
+        "module": "!HardcoreDiamond"
+      }
+    ],
+    "name": "DIAMONDMAT",
+    "ingredient": [
+      {
+		"type": "forge:ore_dict",
+		"ore": "gemDiamond"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "carpetbag:module",
+        "module": "HardcoreDiamond"
+      }
+    ],
+    "name": "DIAMONDMAT",
+    "ingredient": [
+      {
+		"type": "forge:ore_dict",
+		"ore": "ingotDiamond"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "SIDING_WOOD",
+    "ingredient": [
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "ore": "plankWood",
+          "type": "forge:ore_dict"
+        },
+        "minitype": "siding"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "MOULDING_WOOD",
+    "ingredient": [
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "ore": "plankWood",
+          "type": "forge:ore_dict"
+        },
+        "minitype": "moulding"
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "carpetbag"
+      }
+    ],
+    "name": "CORNER_WOOD",
+    "ingredient": [
+      {
+        "type": "carpetbag:minitype",
+        "baseIngredient": {
+          "ore": "plankWood",
+          "type": "forge:ore_dict"
+        },
+        "minitype": "corner"
+      }
+    ]
+  }
+]

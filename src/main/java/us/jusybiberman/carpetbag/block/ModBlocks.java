@@ -11,8 +11,6 @@ public class ModBlocks {
 	public static final BlockIronSand iron_sand = null;
 	@GameRegistry.ObjectHolder("tatara")
 	public static final BlockTatara tatara = null;
-
-      /*
-          public static final MySpecialBlock mySpecialBlock = null; // placeholder for special block below
-      */
+	@GameRegistry.ObjectHolder("kera")
+	public static final BlockKera kera = null;
 }

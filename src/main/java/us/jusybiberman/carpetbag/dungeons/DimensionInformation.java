@@ -24,14 +24,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.dungeons.description.*;
 //import us.jusybiberman.carpetbag.dungeons.types.*;
 import us.jusybiberman.carpetbag.dungeons.description.DimensionDescriptor;
 import us.jusybiberman.carpetbag.util.BlockPosTools;
 import us.jusybiberman.carpetbag.util.GenericTools;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 import us.jusybiberman.carpetbag.util.network.NetworkTools;
 
 import java.util.*;

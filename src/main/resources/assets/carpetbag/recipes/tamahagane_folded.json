@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "carpetbag:tamahagane_folded"
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+	{
+	  "item": "carpetbag:tamahagane_heated"
+	},
+	{
+	  "type": "forge:ore_dict",
+	  "ore": "stickWood"
+	}
+  ]
+}

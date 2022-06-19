@@ -4,7 +4,7 @@ import us.jusybiberman.carpetbag.Carpetbag;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import us.jusybiberman.carpetbag.util.ModConfiguration;
+import us.jusybiberman.carpetbag.config.ModConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;

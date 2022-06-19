@@ -1,0 +1,30 @@
+{
+	"type": "block",
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:iron_ingot",
+					"weight": 20
+				},
+				{
+					"type": "item",
+					"name": "carpetbag:tamahagane",
+					"weight": 30
+				},
+				{
+					"type": "item",
+					"name": "carpetbag:hocho_tetsu",
+					"weight": 20
+				},
+				{
+					"type": "empty",
+					"weight": 30
+				}
+	  		],
+			"name": "carpetbag:kera"
+		}
+	]
+}
