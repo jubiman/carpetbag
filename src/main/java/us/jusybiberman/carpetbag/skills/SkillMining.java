@@ -3,25 +3,26 @@ package us.jusybiberman.carpetbag.skills;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import us.jusybiberman.carpetbag.Carpetbag;
+import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 
 public class SkillMining extends SkillBase {
 	@SubscribeEvent
 	public static void onBlockBreak(BlockEvent.BreakEvent event) {
 		switch(event.getState().getBlock().getTranslationKey()) {
 			case "tile.oreDiamond": {
-				addExp(event.getPlayer(), 40, "SkillMining");
+				CPBCapabilityManager.asCarpetbagPlayer(event.getPlayer()).getSkillStorage().getSkill("mining").addExp(40);
 				break;
 			}
 			case "tile.oreEmerald": {
-				addExp(event.getPlayer(),50, "SkillMining");
+				CPBCapabilityManager.asCarpetbagPlayer(event.getPlayer()).getSkillStorage().getSkill("mining").addExp(50);
 				break;
 			}
 			case "tile.oreGold": {
-				addExp(event.getPlayer(),20, "SkillMining");
+				CPBCapabilityManager.asCarpetbagPlayer(event.getPlayer()).getSkillStorage().getSkill("mining").addExp(20);
 				break;
 			}
 			case "tile.oreCoal": {
-				addExp(event.getPlayer(),10, "SkillMining");
+				CPBCapabilityManager.asCarpetbagPlayer(event.getPlayer()).getSkillStorage().getSkill("mining").addExp(10);
 				break;
 			}
 		}

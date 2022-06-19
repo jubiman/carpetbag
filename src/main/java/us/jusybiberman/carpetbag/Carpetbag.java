@@ -1,7 +1,10 @@
 package us.jusybiberman.carpetbag;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -19,18 +22,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.jusybiberman.carpetbag.block.BlockIronSand;
 import us.jusybiberman.carpetbag.block.BlockKera;
+import us.jusybiberman.carpetbag.block.ModBlocks;
 import us.jusybiberman.carpetbag.block.tatara.BlockTatara;
+import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.client.GuiHandler;
 import us.jusybiberman.carpetbag.commands.CommandSkillExp;
 import us.jusybiberman.carpetbag.commands.debug.CommandCarpetbagData;
 import us.jusybiberman.carpetbag.commands.debug.CommandCreateDungeon;
 import us.jusybiberman.carpetbag.commands.debug.CommandDeleteDungeon;
+import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.dungeons.DungeonManager;
 import us.jusybiberman.carpetbag.dungeons.ModDimensions;
-import us.jusybiberman.carpetbag.events.PlayerJoinEvent;
 import us.jusybiberman.carpetbag.interaction.ModInteractions;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.item.ModItems;
+import us.jusybiberman.carpetbag.network.NetworkHandler;
 import us.jusybiberman.carpetbag.proxy.IProxy;
 import us.jusybiberman.carpetbag.skills.SkillMining;
 import us.jusybiberman.carpetbag.block.tatara.TileEntityTatara;
@@ -74,9 +80,13 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		getLogger().debug("PRE INIT");
+
 		ModInteractions.prePreInit(event);
+
+		NetworkHandler.registerPackets();
 		ModConfiguration.init(event);
 		ModDimensions.init();
+		CPBCapabilityManager.init();
 
 		ModInteractions.preInit(event);
 		ModInteractions.preInitEnd(event);
@@ -88,10 +98,13 @@ public class Carpetbag {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		getLogger().debug("INIT");
+
 		registerGuis();
 		registerTileEntities();
 		registerLootTables();
 		registerEventListeners();
+		registerOreDicts();
+		registerRecipes();
 
 		ModInteractions.init(event);
 	}
@@ -146,12 +159,23 @@ public class Carpetbag {
 
 	private static void registerEventListeners() {
 		MinecraftForge.EVENT_BUS.register(SkillMining.class);
-		MinecraftForge.EVENT_BUS.register(PlayerJoinEvent.class);
 	}
 
 	private static void registerOreDicts() {
 		OreDictionary.registerOre("ingotTamahagane", ModItems.tamahagane_finished);
 		OreDictionary.registerOre("ingotHochoTetsu", ModItems.hocho_tetsu_finished);
+	}
+
+	private static void registerRecipes() {
+		// CraftingManagerSandNet.getInstance().addRecipe(new ItemStack[]{new ItemStack(ModBlocks.IRON_SAND, 1)}, ironSandInput, SAND_PER_IRONSAND);
+		// CraftingManagerInfuser.getInstance().addRecipe(new ShapedOreRecipe(new ResourceLocation(Reference.MOD_ID,"tatara"),new ItemStack(ModBlocks.TATARA), "idi", "g g", "ini", 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'n', new ItemStack(Blocks.NETHERRACK)),4);
+
+		CraftingManagerTatara.getInstance().addRecipe(Ingredient.fromItem(ModItems.iron_sand), new ItemStack(ModBlocks.kera));
+		CraftingManagerTatara.getInstance().addRecipe(Ingredient.fromItem(ModItems.tamahagane), new ItemStack(ModItems.tamahagane_heated));
+		CraftingManagerTatara.getInstance().addRecipe(Ingredient.fromItem(ModItems.tamahagane_wrapped), new ItemStack(ModItems.tamahagane_reheated));
+		CraftingManagerTatara.getInstance().addRecipe(Ingredient.fromItem(ModItems.hocho_tetsu), new ItemStack(ModItems.hocho_tetsu_heated));
+		//CraftingManagerTatara.getInstance().addRecipe(Ingredient.fromItem(Items.CLAY_BALL), ModItems.TEA_CUP.getEmpty());
+
 	}
 
 	/**
@@ -180,6 +204,8 @@ public class Carpetbag {
 			event.getRegistry().register(ModItems.hocho_tetsu.setRegistryName(MOD_ID, "hocho_tetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu"));
 			event.getRegistry().register(ModItems.hocho_tetsu_heated.setRegistryName(MOD_ID, "hocho_tetsu_heated").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu_heated"));
 			event.getRegistry().register(ModItems.hocho_tetsu_finished.setRegistryName(MOD_ID, "hocho_tetsu_finished").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("hocho_tetsu_finished"));
+
+			event.getRegistry().register(ModItems.rice_ash.setRegistryName(MOD_ID, "rice_ash").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("rice_ash"));
 
 			event.getRegistry().register(ModItems.akame_satetsu.setRegistryName(MOD_ID, "akame_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("akame_satetsu"));
 			event.getRegistry().register(ModItems.masa_satetsu.setRegistryName(MOD_ID, "masa_satetsu").setCreativeTab(CarpetbagTab.tabCarpetbagMaterials).setTranslationKey("masa_satetsu"));
@@ -224,7 +250,17 @@ public class Carpetbag {
 
 			// Materials
 			proxy.registerModel(ModItems.tamahagane, 0);
+			proxy.registerModel(ModItems.tamahagane_heated, 0);
+			proxy.registerModel(ModItems.tamahagane_wrapped, 0);
+			proxy.registerModel(ModItems.tamahagane_reheated, 0);
+			proxy.registerModel(ModItems.tamahagane_finished, 0);
+
 			proxy.registerModel(ModItems.hocho_tetsu, 0);
+			proxy.registerModel(ModItems.hocho_tetsu_heated, 0);
+			proxy.registerModel(ModItems.hocho_tetsu_finished, 0);
+
+			proxy.registerModel(ModItems.rice_ash, 0);
+
 			proxy.registerModel(ModItems.akame_satetsu, 0);
 			proxy.registerModel(ModItems.masa_satetsu, 0);
 

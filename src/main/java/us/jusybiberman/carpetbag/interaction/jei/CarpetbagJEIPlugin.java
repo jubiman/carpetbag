@@ -17,6 +17,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import us.jusybiberman.carpetbag.block.ModBlocks;
 import us.jusybiberman.carpetbag.client.gui.GuiTatara;
+import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;
 import us.jusybiberman.carpetbag.interaction.jei.category.TataraRecipeCategory;
 import us.jusybiberman.carpetbag.interaction.jei.wrapper.SmeltingRecipeWrapper;
@@ -57,16 +58,19 @@ public class CarpetbagJEIPlugin implements IModPlugin {
 
 		//registry.handleRecipes(InfuserRecipe.class, recipe -> new InfuserRecipeWrapper(getCraftingRecipeWrapper(helper, recipe.internal),recipe.getRecipeRequiredSpirit()), InfuserRecipeCategory.UID);
 
-		/*registry.addRecipes(CraftingManagerSpindle.getInstance().getRecipes(),SpindleRecipeCategory.UID);
+		/*
+		registry.addRecipes(CraftingManagerSpindle.getInstance().getRecipes(),SpindleRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerSandNet.getInstance().getRecipes(),SandNetRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerWaterNet.getInstance().getRecipes(),WaterNetRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerFireNet.getInstance().getRecipes(),FireNetRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerDryingBox.instance().getRecipes(),DryingBoxRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerSoakingBox.instance().getRecipes(),SoakingBoxRecipeCategory.UID);
-		registry.addRecipes(CraftingManagerTatara.getInstance().getRecipes(),TataraRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerInfuser.getInstance().getRecipeList(),InfuserRecipeCategory.UID);
 		*/
-		/*registry.addRecipes(CraftingManagerInfuserTransmutation.getInstance().getRecipes(),TransmutationRecipeCategory.UID);
+		registry.addRecipes(CraftingManagerTatara.getInstance().getRecipes(),TataraRecipeCategory.UID);
+
+		/*
+		registry.addRecipes(CraftingManagerInfuserTransmutation.getInstance().getRecipes(),TransmutationRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerPacking.getInstance().getRecipes(),PackingRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerNabe.getInstance().getVisualRecipes(),NabeCategory.UID);
 		*/
