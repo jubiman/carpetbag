@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.skills.SkillBase;
 
 public class CommandSkillExp extends CommandBase {
@@ -29,27 +30,32 @@ public class CommandSkillExp extends CommandBase {
 			switch (args[1].toLowerCase()) {
 				case "mining":
 				case "skillmining": {
-					skill_type = "SkillMining";
+					skill_type = "mining";
 					break;
 				}
 				case "fishing":
 				case "skillfishing": {
-					skill_type = "SkillFishing";
+					skill_type = "fishing";
 					break;
 				}
 				case "smithing":
 				case "skillsmithing": {
-					skill_type = "SkillSmithing";
+					skill_type = "smithing";
 					break;
 				}
 				case "foraging":
 				case "skillforaging": {
-					skill_type = "SkillForaging";
+					skill_type = "foraging";
 					break;
 				}
 				case "combat":
 				case "skillcombat": {
-					skill_type = "SkillCombat";
+					skill_type = "combat";
+					break;
+				}
+				case "enchanting":
+				case "skillenchanting": {
+					skill_type = "enchanting";
 					break;
 				}
 				default: {
@@ -66,18 +72,18 @@ public class CommandSkillExp extends CommandBase {
 
 			switch (args[0].toLowerCase()) {
 				case "add": {
-					SkillBase.addExp((EntityPlayer) sender, amount, skill_type);
-					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Added " + amount + " exp to your " + skill_type.substring(5) + " skill."));
+					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).addExp(amount);
+					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Added " + amount + " exp to your " + skill_type + " skill."));
 					break;
 				}
 				case "remove": {
-					SkillBase.removeExp((EntityPlayer) sender, amount, skill_type);
-					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Removed " + amount + " exp from your " + skill_type.substring(5) + " skill."));
+					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).removeExp(amount);
+					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Removed " + amount + " exp from your " + skill_type + " skill."));
 					break;
 				}
 				case "set": {
-					SkillBase.setExp((EntityPlayer) sender, amount, skill_type);
-					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Set your " + skill_type.substring(5) + " skill to " + amount + " exp."));
+					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).setExp(amount);
+					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Set your " + skill_type + " skill to " + amount + " exp."));
 					break;
 				}
 				default: {

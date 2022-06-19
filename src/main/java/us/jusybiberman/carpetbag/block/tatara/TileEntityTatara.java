@@ -116,7 +116,7 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	}
 
 	public static int getItemBurnTime(ItemStack stack) {
-		if(!stack.isEmpty() && stack.isItemEqual(ModItems.material_japan.getMaterial("rice_ash"))) {
+		if(!stack.isEmpty() && stack.isItemEqual(new ItemStack(ModItems.rice_ash))) {
 			return 1600;
 		}
 
