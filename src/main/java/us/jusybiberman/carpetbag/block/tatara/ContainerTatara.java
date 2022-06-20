@@ -13,23 +13,24 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 
 public class ContainerTatara extends Container {
-	private BlockPos pos;
 	private final TileEntityTatara tileTatara;
+	private final EntityPlayer player;
 	private int cookTime;
 	private int totalCookTime;
 	private int furnaceBurnTime;
 	private int currentItemBurnTime;
 
 	public ContainerTatara(EntityPlayer player, World world, int x, int y, int z) {
-		this.pos = new BlockPos(x, y, z);
-		this.tileTatara = (TileEntityTatara) world.getTileEntity(pos);
+		tileTatara = (TileEntityTatara) world.getTileEntity(new BlockPos(x, y, z));
+		this.player = player;
 
-		addSlotToContainer(new SlotItemHandler(tileTatara.inventory, 0, 56, 17));
-		addSlotToContainer(new SlotItemHandler(tileTatara.inventory, 1, 56, 53));
-		addSlotToContainer(new SlotItemHandler(tileTatara.inventory, 2, 116, 35));
+		addSlotToContainer(new SlotItemHandler(tileTatara.getInventory(player), 0, 56, 17));
+		addSlotToContainer(new SlotItemHandler(tileTatara.getInventory(player), 1, 56, 53));
+		addSlotToContainer(new SlotItemHandler(tileTatara.getInventory(player), 2, 116, 35));
 
 		bindPlayerInventory(player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,null));
 	}
@@ -53,51 +54,49 @@ public class ContainerTatara extends Container {
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		Iterator<IContainerListener> it = this.listeners.iterator();
-		while(it.hasNext())
-		{
-			IContainerListener craft = it.next();
-			if (this.furnaceBurnTime != tileTatara.furnaceBurnTime) {
-				craft.sendWindowProperty(this, 0, tileTatara.furnaceBurnTime);
+		for (IContainerListener craft : this.listeners) {
+			if (this.furnaceBurnTime != tileTatara.getProvider(player).furnaceBurnTime) {
+				craft.sendWindowProperty(this, 0, tileTatara.getProvider(player).furnaceBurnTime);
 			}
 
-			if (this.currentItemBurnTime != tileTatara.currentItemBurnTime) {
-				craft.sendWindowProperty(this, 1, tileTatara.currentItemBurnTime);
+			if (this.currentItemBurnTime != tileTatara.getProvider(player).currentItemBurnTime) {
+				craft.sendWindowProperty(this, 1, tileTatara.getProvider(player).currentItemBurnTime);
 			}
 
-			if (this.cookTime != tileTatara.cookTime) {
-				craft.sendWindowProperty(this, 2, tileTatara.cookTime);
+			if (this.cookTime != tileTatara.getProvider(player).cookTime) {
+				craft.sendWindowProperty(this, 2, tileTatara.getProvider(player).cookTime);
 			}
 
-			if (this.totalCookTime != tileTatara.totalCookTime) {
-				craft.sendWindowProperty(this, 3, tileTatara.totalCookTime);
+			if (this.totalCookTime != tileTatara.getProvider(player).totalCookTime) {
+				craft.sendWindowProperty(this, 3, tileTatara.getProvider(player).totalCookTime);
 			}
 		}
-		this.furnaceBurnTime = tileTatara.furnaceBurnTime;
-		this.currentItemBurnTime = tileTatara.currentItemBurnTime;
-		this.cookTime = tileTatara.cookTime;
-		this.totalCookTime = tileTatara.totalCookTime;
+		this.furnaceBurnTime = tileTatara.getProvider(player).furnaceBurnTime;
+		this.currentItemBurnTime = tileTatara.getProvider(player).currentItemBurnTime;
+		this.cookTime = tileTatara.getProvider(player).cookTime;
+		this.totalCookTime = tileTatara.getProvider(player).totalCookTime;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int fieldId, int fieldValue) {
 		switch(fieldId)
 		{
-			case 0: tileTatara.furnaceBurnTime = fieldValue; break;
-			case 1: tileTatara.currentItemBurnTime = fieldValue; break;
-			case 2: tileTatara.cookTime = fieldValue; break;
-			case 3: tileTatara.totalCookTime = fieldValue; break;
+			case 0: tileTatara.getProvider(player).furnaceBurnTime = fieldValue; break;
+			case 1: tileTatara.getProvider(player).currentItemBurnTime = fieldValue; break;
+			case 2: tileTatara.getProvider(player).cookTime = fieldValue; break;
+			case 3: tileTatara.getProvider(player).totalCookTime = fieldValue; break;
 		}
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
+	public boolean canInteractWith(@Nonnull EntityPlayer player)
 	{
 		return true;
 	}
 
+	@Nonnull
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int index)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer player, int index)
 	{
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
