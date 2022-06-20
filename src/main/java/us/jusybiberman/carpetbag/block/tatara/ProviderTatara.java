@@ -71,9 +71,8 @@ public class ProviderTatara {
 	}
 
 	public static int getItemBurnTime(ItemStack stack) {
-		if(!stack.isEmpty() && stack.isItemEqual(new ItemStack(ModItems.rice_ash))) {
+		if(!stack.isEmpty() && stack.isItemEqual(new ItemStack(ModItems.rice_ash)))
 			return 1600;
-		}
 
 		return 0;
 	}

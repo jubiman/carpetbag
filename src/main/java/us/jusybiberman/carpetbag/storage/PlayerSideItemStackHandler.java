@@ -1,10 +1,13 @@
 package us.jusybiberman.carpetbag.storage;
 
+import net.minecraft.init.Items;
+import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
+
+import static us.jusybiberman.carpetbag.block.tatara.ProviderTatara.isItemFuel;
 
 public class PlayerSideItemStackHandler extends ItemStackHandler {
 	private final boolean allowWrite;
@@ -14,12 +17,28 @@ public class PlayerSideItemStackHandler extends ItemStackHandler {
 		allowWrite = aw;
 	}
 
+	public boolean isItemValidForSlot(int index, ItemStack stack)
+	{
+		if (index == 2)
+		{
+			return false;
+		}
+		else if (index != 1)
+		{
+			return true;
+		}
+		else
+		{
+			return isItemFuel(stack);
+		}
+	}
+
 	@Nonnull
 	@Override
 	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-		if (allowWrite) {
+		if (allowWrite && isItemValidForSlot(slot, stack))
 			return super.insertItem(slot, stack, simulate);
-		} else return stack;
+		else return stack;
 	}
 
 	@Nonnull
