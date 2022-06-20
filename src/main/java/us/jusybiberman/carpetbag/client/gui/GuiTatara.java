@@ -14,10 +14,12 @@ import us.jusybiberman.carpetbag.block.tatara.TileEntityTatara;
 public class GuiTatara extends GuiContainer {
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(Carpetbag.MOD_ID,"textures/gui/tatara.png");
 	private final TileEntityTatara tileTatara;
+	private final EntityPlayer player;
 
 	public GuiTatara(EntityPlayer player, World world, int x, int y, int z) {
 		super(new ContainerTatara(player, world, x, y, z));
 		this.tileTatara = (TileEntityTatara) world.getTileEntity(new BlockPos(x,y,z));
+		this.player = player;
 	}
 
 	@Override
@@ -40,12 +42,12 @@ public class GuiTatara extends GuiContainer {
 		int offsetTop = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(offsetLeft, offsetTop, 0, 0, this.xSize, this.ySize);
 		int val;
-		if(tileTatara.isBurning()) {
-			val = tileTatara.getBurnLeftScaled(13);
+		if(tileTatara.getProvider(player).isBurning()) {
+			val = tileTatara.getProvider(player).getBurnLeftScaled(13);
 			this.drawTexturedModalRect(offsetLeft + 56, offsetTop + 36 + 12 - val, 176, 12 - val, 14, val + 1);
 		}
 
-		val = tileTatara.getCookProgressScaled(24);
+		val = tileTatara.getProvider(player).getCookProgressScaled(24);
 		this.drawTexturedModalRect(offsetLeft + 79, offsetTop + 34, 176, 14, val + 1, 16);
 	}
 }

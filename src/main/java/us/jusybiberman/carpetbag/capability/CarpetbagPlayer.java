@@ -46,13 +46,17 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 	}
 
 	@Override
-	public IPlayerOverlay getPlayerOverlay() {
-		return playerOverlay;
+	public ISkillStorage getSkillStorage() {
+		return skillStorage;
+	}
+	@Override
+	public IStatStorage getStatStorage() {
+		return statStorage;
 	}
 
 	@Override
-	public ISkillStorage getSkillStorage() {
-		return skillStorage;
+	public IPlayerOverlay getPlayerOverlay() {
+		return playerOverlay;
 	}
 
 	@Override
@@ -85,6 +89,7 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 			NBTTagCompound compound = new NBTTagCompound();
 			compound.setTag("mana_storage", playerCap.manaStorage.serializeNBT());
 			compound.setTag("skill_storage", playerCap.skillStorage.serializeNBT());
+			compound.setTag("stat_storage", playerCap.skillStorage.serializeNBT());
 
 			return compound;
 		}
@@ -95,9 +100,12 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 
 			NBTTagCompound compound = ((NBTTagCompound) nbt);
 
-			if (compound.hasKey("essence_storage")) {
-				playerCap.manaStorage.deserializeNBT(compound.getTag("essence_storage"));
-			}
+			if (compound.hasKey("mana_storage"))
+				playerCap.manaStorage.deserializeNBT(compound.getTag("mana_storage"));
+			if (compound.hasKey("skill_storage"))
+				playerCap.statStorage.deserializeNBT(compound.getTag("skill_storage"));
+			if (compound.hasKey("stat_storage"))
+				playerCap.statStorage.deserializeNBT(compound.getTag("stat_storage"));
 		}
 
 		@Override
@@ -105,6 +113,8 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 			CarpetbagPlayer playerCap = validateDefaultImpl(instance);
 
 			playerCap.manaStorage.writeToBuffer(buffer);
+			playerCap.skillStorage.writeToBuffer(buffer);
+			playerCap.statStorage.writeToBuffer(buffer);
 		}
 
 		@Override
@@ -112,6 +122,8 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 			CarpetbagPlayer playerCap = validateDefaultImpl(instance);
 
 			playerCap.manaStorage.readFromBuffer(buffer);
+			playerCap.skillStorage.readFromBuffer(buffer);
+			playerCap.statStorage.readFromBuffer(buffer);
 		}
 
 		@Override

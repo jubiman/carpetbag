@@ -6,9 +6,9 @@ import us.jusybiberman.carpetbag.util.exceptions.WrongSideException;
 public interface ICarpetbagPlayer {
 	IManaStorage getManaStorage();
 
-	IPlayerOverlay getPlayerOverlay();
-
 	ISkillStorage getSkillStorage();
+	IStatStorage getStatStorage();
+	IPlayerOverlay getPlayerOverlay();
 
 	void onTick(Side side);
 

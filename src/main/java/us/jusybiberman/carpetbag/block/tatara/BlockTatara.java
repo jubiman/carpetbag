@@ -8,17 +8,22 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.block.BlockContainerBase;
+import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
 import us.jusybiberman.carpetbag.lib.GuiIds;
 import us.jusybiberman.carpetbag.util.IHasVariants;
 import us.jusybiberman.carpetbag.util.InvUtils;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BlockTatara extends BlockContainerBase implements IHasVariants {
 	public BlockTatara() {
@@ -37,11 +42,14 @@ public class BlockTatara extends BlockContainerBase implements IHasVariants {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
-			playerIn.openGui(Carpetbag.INSTANCE, GuiIds.TATARA, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			if(((TileEntityTatara) Objects.requireNonNull(worldIn.getTileEntity(pos))).isValidStructure())
+				playerIn.openGui(Carpetbag.INSTANCE, GuiIds.TATARA, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			else
+				playerIn.sendMessage(new TextComponentString("Structure is invalid."));
 		}
 		return true;
 	}
