@@ -53,12 +53,12 @@ public class SkillStorage extends SerializableInnerCap<NBTBase, SkillStorage> im
 
 	private void readFromNBT(NBTTagCompound tag) {
 		skills.clear();
-		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getInteger("exp"), tag.getCompoundTag("mining").getInteger("threshold")));
-		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getInteger("exp"), tag.getCompoundTag("enchanting").getInteger("threshold")));
-		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getInteger("exp"), tag.getCompoundTag("smithing").getInteger("threshold")));
-		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getInteger("exp"), tag.getCompoundTag("foraging").getInteger("threshold")));
-		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getInteger("exp"), tag.getCompoundTag("combat").getInteger("threshold")));
-		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getInteger("exp"), tag.getCompoundTag("fishing").getInteger("threshold")));
+		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("mining").getLong("threshold")));
+		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("enchanting").getLong("threshold")));
+		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("smithing").getLong("threshold")));
+		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("foraging").getLong("threshold")));
+		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("combat").getLong("threshold")));
+		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("fishing").getLong("threshold")));
 	}
 
 	@Override
@@ -76,11 +76,11 @@ public class SkillStorage extends SerializableInnerCap<NBTBase, SkillStorage> im
 	public void readFromBuffer(PacketBuffer buffer) {
 		NBTTagCompound tag = Objects.requireNonNull(ByteBufUtils.readTag(buffer)).getCompoundTag("skills");
 		skills.clear();
-		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getInteger("exp"), tag.getCompoundTag("mining").getInteger("threshold")));
-		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getInteger("exp"), tag.getCompoundTag("enchanting").getInteger("threshold")));
-		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getInteger("exp"), tag.getCompoundTag("smithing").getInteger("threshold")));
-		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getInteger("exp"), tag.getCompoundTag("foraging").getInteger("threshold")));
-		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getInteger("exp"), tag.getCompoundTag("combat").getInteger("threshold")));
-		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getInteger("exp"), tag.getCompoundTag("fishing").getInteger("threshold")));
+		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("mining").getLong("threshold")));
+		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("enchanting").getLong("threshold")));
+		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("smithing").getLong("threshold")));
+		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("foraging").getLong("threshold")));
+		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("combat").getLong("threshold")));
+		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("fishing").getLong("threshold")));
 	}
 }
