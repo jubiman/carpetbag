@@ -1,14 +1,18 @@
 package us.jusybiberman.carpetbag.api.capability;
 
 import net.minecraftforge.fml.relauncher.Side;
+import us.jusybiberman.carpetbag.capability.ManaStorage;
+import us.jusybiberman.carpetbag.capability.PlayerOverlay;
+import us.jusybiberman.carpetbag.capability.SkillStorage;
+import us.jusybiberman.carpetbag.capability.StatStorage;
 import us.jusybiberman.carpetbag.util.exceptions.WrongSideException;
 
 public interface ICarpetbagPlayer {
-	IManaStorage getManaStorage();
+	ManaStorage getManaStorage();
 
-	ISkillStorage getSkillStorage();
-	IStatStorage getStatStorage();
-	IPlayerOverlay getPlayerOverlay();
+	SkillStorage getSkillStorage();
+	StatStorage getStatStorage();
+	PlayerOverlay getPlayerOverlay();
 
 	void onTick(Side side);
 

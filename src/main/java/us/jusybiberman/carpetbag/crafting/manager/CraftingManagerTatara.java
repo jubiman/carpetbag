@@ -22,17 +22,17 @@ public class CraftingManagerTatara {
 	private CraftingManagerTatara() {
 	}
 
-	public void addRecipe(Ingredient input, ItemStack output) {
-		this.recipes.add(createRecipe(input, output));
+	public void addRecipe(Ingredient input, ItemStack output, int level) {
+		this.recipes.add(createRecipe(input, output, level));
 	}
 
 	public void addRecipe(SmeltingRecipe recipe) {
 		this.recipes.add(recipe);
 	}
 
-	protected SmeltingRecipe createRecipe(Ingredient input, ItemStack output)
+	protected SmeltingRecipe createRecipe(Ingredient input, ItemStack output, int level)
 	{
-		return new SmeltingRecipe(input,output);
+		return new SmeltingRecipe(input, output, level);
 	}
 
 	public SmeltingRecipe getSmeltingRecipe(ItemStack input) {

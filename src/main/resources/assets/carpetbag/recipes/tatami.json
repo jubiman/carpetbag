@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "betterwithaddons:tatami",
+    "item": "carpetbag:tatami",
 	"data": 0,
 	"count": 2
   },
@@ -15,7 +15,7 @@
 	  "ore": "cropRush"
     },
 	"H": {
-      "item": "betterwithaddons:japanmat",
+      "item": "carpetbag:japanmat",
 	  "data": 3
     }
   }

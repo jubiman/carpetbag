@@ -7,53 +7,41 @@ import us.jusybiberman.carpetbag.Carpetbag;
 
 public class SkillBase {
 	// TODO: save exp as total exp? then maybe make it a long? or prestiges?
-	private int exp;
-	private int threshold;
+	private long exp;
+	private long threshold;
 
 	public SkillBase() {
 		exp = 0;
-		threshold = 10;
+		threshold = nextThreshold();
 	}
 
-	public SkillBase(int xp, int thr) {
+	public SkillBase(long xp, long thr) {
 		exp = xp;
 		threshold = thr;
 	}
 
-	@Deprecated
-	public static int addExp(EntityPlayer player, int toAdd, String skill) {
-		int currExp = player.getEntityData().getCompoundTag("CarpetbagData").getCompoundTag("SkillMining").getInteger("exp");
-
-		if(player.getEntityData().getCompoundTag("CarpetbagData").isEmpty()) {
-			// Shouldn't be but ok...
-			// TODO: Maybe throw an error?
-			// TODO: Just do some testing for now
-			return -1;
-		}
-
-		player.getEntityData().getCompoundTag("CarpetbagData").getCompoundTag(skill).setInteger("exp", currExp + toAdd);
-
-		return currExp + toAdd;
-	}
-
-	public void addExp(int amount) {
+	public boolean addExp(long amount) {
 		exp += amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void removeExp(int amount){
+	public boolean removeExp(long amount){
 		exp -= amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void setExp(int amount) {
+	public boolean setExp(long amount) {
 		exp = amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void levelUp() {
-		while(exp > threshold)
+	public boolean levelUp() {
+		if(exp > threshold) {
 			threshold = nextThreshold();
+			return true;
+		}
+		return false;
+		// TODO: unlock items/rewards and add messages?
 	}
 
 	public int getLevel() {
@@ -61,21 +49,21 @@ public class SkillBase {
 		return (int) Math.floor((250 + Math.sqrt(62500 + 1000 * exp)) / 500);
 	}
 
-	public int getExp() {
+	public long getExp() {
 		return exp;
 	}
 
-	private int nextThreshold() {
+	private long nextThreshold() {
 		// TODO: decide whether to take this formula or a different one
 		// http://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
-		int x = getLevel();
-		return 250 * (x * x) - (250 * x);
+		int x = getLevel() + 1;
+		return 250 * ((long) x * x) - (250L * x);
 	}
 
 	public NBTTagCompound save() {
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setInteger("exp", exp);
-		tag.setInteger("threshold", threshold);
+		tag.setLong("exp", exp);
+		tag.setLong("threshold", threshold);
 		return tag;
 	}
 }

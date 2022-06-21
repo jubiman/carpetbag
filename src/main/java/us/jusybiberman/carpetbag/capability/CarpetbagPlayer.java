@@ -19,7 +19,6 @@ import java.util.UUID;
 
 public class CarpetbagPlayer implements ICarpetbagPlayer {
 	private final ManaStorage manaStorage;
-
 	private final SkillStorage skillStorage;
 	private final StatStorage statStorage;
 	private final PlayerOverlay playerOverlay;
@@ -41,21 +40,21 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 	}
 
 	@Override
-	public IManaStorage getManaStorage() {
+	public ManaStorage getManaStorage() {
 		return manaStorage;
 	}
 
 	@Override
-	public ISkillStorage getSkillStorage() {
+	public SkillStorage getSkillStorage() {
 		return skillStorage;
 	}
 	@Override
-	public IStatStorage getStatStorage() {
+	public StatStorage getStatStorage() {
 		return statStorage;
 	}
 
 	@Override
-	public IPlayerOverlay getPlayerOverlay() {
+	public PlayerOverlay getPlayerOverlay() {
 		return playerOverlay;
 	}
 
