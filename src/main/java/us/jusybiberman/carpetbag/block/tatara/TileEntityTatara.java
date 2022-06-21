@@ -38,7 +38,6 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	private NBTTagCompound compound = new NBTTagCompound();
 
 	public void createProvider(EntityPlayer player) {
-		Carpetbag.getLogger().debug(compound);
 		for (String k : compound.getKeySet()) {
 			UUID id;
 			try {
@@ -46,7 +45,6 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 			} catch (Exception e) { continue; }
 
 			// Read NBT data if player already used this tatara
-			Carpetbag.getLogger().debug(player.getUniqueID().equals(id));
 			if (player.getUniqueID().equals(id)) {
 				ProviderTatara p = new ProviderTatara(this, player);
 				p.readDataFromNBT(compound.getCompoundTag(k));
@@ -135,7 +133,6 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound) {
 		// We read the data when a provider is created
-		Carpetbag.getLogger().debug(compound);
 		this.compound = compound;
 	}
 }
