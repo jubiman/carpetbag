@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
+import us.jusybiberman.carpetbag.api.capability.ICarpetbagPlayer;
 import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;
@@ -25,9 +26,11 @@ public class ProviderTatara {
 	public PlayerSideItemStackHandler inventory = createItemStackHandler();
 
 	private final TileEntityTatara tile;
+	private final ICarpetbagPlayer player;
 
-	public ProviderTatara(TileEntityTatara tileEntityTatara) {
+	public ProviderTatara(TileEntityTatara tileEntityTatara, EntityPlayer p) {
 		tile = tileEntityTatara;
+		player = CPBCapabilityManager.asCarpetbagPlayer(p);
 	}
 
 	public PlayerSideItemStackHandler createItemStackHandler() {
@@ -62,6 +65,7 @@ public class ProviderTatara {
 		this.cookTime = compound.getInteger("CookTime");
 		this.totalCookTime = compound.getInteger("CookTimeTotal");
 		this.currentItemBurnTime = getItemBurnTime(this.inventory.getStackInSlot(1));
+
 	}
 
 
@@ -82,7 +86,7 @@ public class ProviderTatara {
 	}
 
 	public int getCookProgressScaled(int width) {
-		return totalCookTime != 0 && cookTime != 0?cookTime * width / totalCookTime:0;
+		return totalCookTime != 0 && cookTime != 0 ? cookTime * width / totalCookTime:0;
 	}
 
 	public int getBurnLeftScaled(int height) {
@@ -97,7 +101,9 @@ public class ProviderTatara {
 		ItemStack inputstack = inventory.getStackInSlot(0);
 		ItemStack outputstack = inventory.getStackInSlot(2);
 		SmeltingRecipe recipe = CraftingManagerTatara.getInstance().getSmeltingRecipe(inputstack);
-		if(inputstack.isEmpty() || recipe == null) {
+		if (inputstack.isEmpty() || recipe == null) {
+			return false;
+		} else if (recipe.getLevelReq() > player.getSkillStorage().getSkill("smithing").getLevel()) {
 			return false;
 		} else {
 			ItemStack itemstack = recipe.getOutput(Lists.newArrayList(inputstack), tile).get(0);

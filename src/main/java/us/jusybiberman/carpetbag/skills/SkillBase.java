@@ -12,7 +12,7 @@ public class SkillBase {
 
 	public SkillBase() {
 		exp = 0;
-		threshold = 10;
+		threshold = nextThreshold();
 	}
 
 	public SkillBase(long xp, long thr) {
@@ -20,24 +20,28 @@ public class SkillBase {
 		threshold = thr;
 	}
 
-	public void addExp(int amount) {
+	public boolean addExp(long amount) {
 		exp += amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void removeExp(int amount){
+	public boolean removeExp(long amount){
 		exp -= amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void setExp(int amount) {
+	public boolean setExp(long amount) {
 		exp = amount;
-		levelUp();
+		return levelUp();
 	}
 
-	public void levelUp() {
-		while(exp > threshold)
+	public boolean levelUp() {
+		if(exp > threshold) {
 			threshold = nextThreshold();
+			return true;
+		}
+		return false;
+		// TODO: unlock items/rewards and add messages?
 	}
 
 	public int getLevel() {
@@ -49,11 +53,11 @@ public class SkillBase {
 		return exp;
 	}
 
-	private int nextThreshold() {
+	private long nextThreshold() {
 		// TODO: decide whether to take this formula or a different one
 		// http://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
-		int x = getLevel();
-		return 250 * (x * x) - (250 * x);
+		int x = getLevel() + 1;
+		return 250 * ((long) x * x) - (250L * x);
 	}
 
 	public NBTTagCompound save() {

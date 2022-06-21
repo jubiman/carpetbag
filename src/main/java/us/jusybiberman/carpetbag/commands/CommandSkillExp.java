@@ -63,26 +63,32 @@ public class CommandSkillExp extends CommandBase {
 				}
 			}
 
-			int amount;
+			long amount;
 			try {
-				amount = Integer.parseInt(args[2]);
+				amount = Long.parseLong(args[2]);
 			} catch (NumberFormatException e) {
 				throw new CommandException(TextFormatting.RED + "Failed to parse amount. Please check whether it's a valid number");
 			}
 
 			switch (args[0].toLowerCase()) {
 				case "add": {
-					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).addExp(amount);
+					if(CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).addExp(amount)) {
+						sender.sendMessage(new TextComponentString("Your " + skill_type + " leveled up to " + CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).getLevel()));
+					}
 					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Added " + amount + " exp to your " + skill_type + " skill."));
 					break;
 				}
 				case "remove": {
-					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).removeExp(amount);
+					if(CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).removeExp(amount)) {
+						sender.sendMessage(new TextComponentString("Your " + skill_type + " leveled up to " + CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).getLevel()));
+					}
 					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Removed " + amount + " exp from your " + skill_type + " skill."));
 					break;
 				}
 				case "set": {
-					CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).setExp(amount);
+					if(CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).setExp(amount)) {
+						sender.sendMessage(new TextComponentString("Your " + skill_type + " leveled up to " + CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).getSkillStorage().getSkill(skill_type).getLevel()));
+					}
 					sender.sendMessage(new TextComponentString(TextFormatting.WHITE + "Set your " + skill_type + " skill to " + amount + " exp."));
 					break;
 				}

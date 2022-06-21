@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import us.jusybiberman.carpetbag.Carpetbag;
+import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 
 public class CommandCarpetbagData extends CommandBase {
 	@Override
@@ -24,6 +25,8 @@ public class CommandCarpetbagData extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender instanceof EntityPlayer) {
+			// TODO: update
+			//CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender)
 			sender.sendMessage(new TextComponentString(TextFormatting.YELLOW + "CarpetbagData:" + ((EntityPlayer) sender).getEntityData().getCompoundTag("CarpetbagData")));
 			return;
 		}

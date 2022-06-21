@@ -4,18 +4,22 @@ import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tileentity.TileEntity;
+import us.jusybiberman.carpetbag.api.IHasLevelReq;
 import us.jusybiberman.carpetbag.util.IHasSize;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SmeltingRecipe {
+public class SmeltingRecipe implements IHasLevelReq {
 	public Ingredient input;
 	public ItemStack output;
 
-	public SmeltingRecipe(Ingredient input, ItemStack output) {
-		this.input = input;
-		this.output = output;
+	private final int levelReq;
+
+	public SmeltingRecipe(Ingredient i, ItemStack o, int lvlReq) {
+		input = i;
+		output = o;
+		levelReq = lvlReq;
 	}
 
 	public List<ItemStack> getOutput(List<ItemStack> inputs, TileEntity tile) {
@@ -46,4 +50,8 @@ public class SmeltingRecipe {
 		return input instanceof IHasSize ? ((IHasSize) input).getSize() : 1;
 	}
 
+	@Override
+	public int getLevelReq() {
+		return levelReq;
+	}
 }

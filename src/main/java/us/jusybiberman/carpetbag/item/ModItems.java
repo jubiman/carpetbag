@@ -29,6 +29,8 @@ public class ModItems {
 	public static final Item tamahagane = new Item();
 	@GameRegistry.ObjectHolder("tamahagane_heated")
 	public static final Item tamahagane_heated = new Item();
+	@GameRegistry.ObjectHolder("tamahagane_folded")
+	public static final Item tamahagane_folded = new Item();
 	@GameRegistry.ObjectHolder("tamahagane_wrapped")
 	public static final Item tamahagane_wrapped = new Item();
 	@GameRegistry.ObjectHolder("tamahagane_reheated")
@@ -47,6 +49,8 @@ public class ModItems {
 	public static final Item masa_satetsu = new Item();
 	@GameRegistry.ObjectHolder("rice_ash")
 	public static Item rice_ash = new Item();
+	@GameRegistry.ObjectHolder("washi")
+	public static Item washi = new Item();
 
 	@GameRegistry.ObjectHolder("tatara")
 	public static final ItemBlock tatara = new ItemBlock(ModBlocks.tatara);

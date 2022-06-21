@@ -1,0 +1,31 @@
+{
+	"result": {
+		"item": "carpetbag:tatara",
+		"data": 0,
+		"count": 1
+	},
+	"pattern": [
+		"IDI",
+		"G G",
+		"INI"
+	],
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"D": {
+			"type": "forge:ore_dict",
+			"ore": "gemDiamond"
+		},
+	  	"G": {
+		  	"type": "forge:ore_dict",
+		  	"ore": "ingotGold"
+	  	},
+		"N": {
+		  	"type": "forge:ore_dict",
+		  	"ore": "netherrack"
+		}
+  	}
+}

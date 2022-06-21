@@ -67,6 +67,7 @@ public class CarpetbagJEIPlugin implements IModPlugin {
 		registry.addRecipes(CraftingManagerSoakingBox.instance().getRecipes(),SoakingBoxRecipeCategory.UID);
 		registry.addRecipes(CraftingManagerInfuser.getInstance().getRecipeList(),InfuserRecipeCategory.UID);
 		*/
+		//registry.addRecipes();
 		registry.addRecipes(CraftingManagerTatara.getInstance().getRecipes(),TataraRecipeCategory.UID);
 
 		/*

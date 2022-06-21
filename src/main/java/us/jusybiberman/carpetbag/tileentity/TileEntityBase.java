@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.lib.IRedstoneSensitive;
 
 public abstract class TileEntityBase extends TileEntity
