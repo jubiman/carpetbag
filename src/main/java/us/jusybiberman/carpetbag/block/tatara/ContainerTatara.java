@@ -1,6 +1,7 @@
 package us.jusybiberman.carpetbag.block.tatara;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.api.capability.ICarpetbagPlayer;
 import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.capability.CarpetbagPlayer;
@@ -118,15 +120,6 @@ public class ContainerTatara extends Container {
 			else if(!mergeItemStack(stack1, 0, 3, false))
 				return ItemStack.EMPTY;
 
-			ICarpetbagPlayer p = CPBCapabilityManager.asCarpetbagPlayer(player);
-			boolean lvlup = false;
-			switch(stack.getItem().getRegistryName().toString()) {
-				case "carpetbag:kera": lvlup = p.getSkillStorage().getSkill("smithing").addExp(100L * stack.getCount()); break;
-				case "carpetbag:hocho_tetsu_heated":
-				case "carpetbag:tamahagane_heated": lvlup = p.getSkillStorage().getSkill("smithing").addExp(300L * stack.getCount()); break;
-				case "carpetbag:tamahagane_reheated": lvlup = p.getSkillStorage().getSkill("smithing").addExp(700L * stack.getCount()); break;
-			}
-			if (lvlup) player.sendMessage(new TextComponentString("Your smithing skill leveled up to level " + p.getSkillStorage().getSkill("smithing").getLevel()));
 
 			if(stack1.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
@@ -134,5 +127,32 @@ public class ContainerTatara extends Container {
 				slot.onSlotChanged();
 		}
 		return stack;
+	}
+
+	@Nonnull
+	@Override
+	public ItemStack slotClick(int slotId, int dragType, @Nonnull ClickType clickTypeIn, @Nonnull EntityPlayer player) {
+		if (slotId == 2) {
+			ItemStack stack = this.inventorySlots.get(2).getStack();
+			if (this.inventorySlots.get(2).getHasStack()) {
+				ICarpetbagPlayer p = CPBCapabilityManager.asCarpetbagPlayer(player);
+				boolean lvlup = false;
+				switch (stack.getItem().getRegistryName().toString()) {
+					case "carpetbag:kera":
+						lvlup = p.getSkillStorage().getSkill("smithing").addExp(100L * stack.getCount());
+						break;
+					case "carpetbag:hocho_tetsu_heated":
+					case "carpetbag:tamahagane_heated":
+						lvlup = p.getSkillStorage().getSkill("smithing").addExp(300L * stack.getCount());
+						break;
+					case "carpetbag:tamahagane_reheated":
+						lvlup = p.getSkillStorage().getSkill("smithing").addExp(700L * stack.getCount());
+						break;
+				}
+				if (lvlup)
+					player.sendMessage(new TextComponentString("Your smithing skill leveled up to level " + p.getSkillStorage().getSkill("smithing").getLevel()));
+			}
+		}
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 }

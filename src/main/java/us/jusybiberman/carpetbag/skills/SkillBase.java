@@ -57,7 +57,7 @@ public class SkillBase {
 		// TODO: decide whether to take this formula or a different one
 		// http://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
 		int x = getLevel() + 1;
-		return 250 * ((long) x * x) - (250L * x);
+		return 250L * ((long) x * x) - (250L * x);
 	}
 
 	public NBTTagCompound save() {

@@ -52,13 +52,15 @@ public class SkillStorage extends SerializableInnerCap<NBTBase, SkillStorage> im
 	}
 
 	private void readFromNBT(NBTTagCompound tag) {
-		skills.clear();
-		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("mining").getLong("threshold")));
-		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("enchanting").getLong("threshold")));
-		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("smithing").getLong("threshold")));
-		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("foraging").getLong("threshold")));
-		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("combat").getLong("threshold")));
-		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("fishing").getLong("threshold")));
+		if (tag.hasKey("skills")) {
+			skills.clear();
+			skills.put("mining", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("mining").getLong("threshold")));
+			skills.put("enchanting", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("enchanting").getLong("threshold")));
+			skills.put("smithing", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("smithing").getLong("threshold")));
+			skills.put("foraging", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("foraging").getLong("threshold")));
+			skills.put("combat", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("combat").getLong("threshold")));
+			skills.put("fishing", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("fishing").getLong("threshold")));
+		}
 	}
 
 	@Override
@@ -68,19 +70,21 @@ public class SkillStorage extends SerializableInnerCap<NBTBase, SkillStorage> im
 		for (String k : skills.keySet())
 			tag.setTag(k, skills.get(k).save());
 
-		comp.setTag("skill", tag);
+		comp.setTag("skills", tag);
 		ByteBufUtils.writeTag(buffer, comp);
 	}
 
 	@Override
 	public void readFromBuffer(PacketBuffer buffer) {
-		NBTTagCompound tag = Objects.requireNonNull(ByteBufUtils.readTag(buffer)).getCompoundTag("skills");
-		skills.clear();
-		skills.put("mining", new SkillBase(tag.getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("mining").getLong("threshold")));
-		skills.put("enchanting", new SkillBase(tag.getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("enchanting").getLong("threshold")));
-		skills.put("smithing", new SkillBase(tag.getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("smithing").getLong("threshold")));
-		skills.put("foraging", new SkillBase(tag.getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("foraging").getLong("threshold")));
-		skills.put("combat", new SkillBase(tag.getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("combat").getLong("threshold")));
-		skills.put("fishing", new SkillBase(tag.getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("fishing").getLong("threshold")));
+		NBTTagCompound tag = Objects.requireNonNull(ByteBufUtils.readTag(buffer));
+		if (tag.hasKey("skills")) {
+			skills.clear();
+			skills.put("mining", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("mining").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("mining").getLong("threshold")));
+			skills.put("enchanting", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("enchanting").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("enchanting").getLong("threshold")));
+			skills.put("smithing", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("smithing").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("smithing").getLong("threshold")));
+			skills.put("foraging", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("foraging").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("foraging").getLong("threshold")));
+			skills.put("combat", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("combat").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("combat").getLong("threshold")));
+			skills.put("fishing", new SkillBase(tag.getCompoundTag("skills").getCompoundTag("fishing").getLong("exp"), tag.getCompoundTag("skills").getCompoundTag("fishing").getLong("threshold")));
+		}
 	}
 }

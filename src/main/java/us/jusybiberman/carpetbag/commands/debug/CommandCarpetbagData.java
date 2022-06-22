@@ -25,9 +25,7 @@ public class CommandCarpetbagData extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender instanceof EntityPlayer) {
-			// TODO: update
-			//CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender)
-			sender.sendMessage(new TextComponentString(TextFormatting.YELLOW + "CarpetbagData:" + ((EntityPlayer) sender).getEntityData().getCompoundTag("CarpetbagData")));
+			sender.sendMessage(new TextComponentString(TextFormatting.YELLOW + "CarpetbagData:\n" + CPBCapabilityManager.asCarpetbagPlayer((EntityPlayer) sender).toString()));
 			return;
 		}
 		if(args.length != 1) throw new CommandException("Too little arguments. Expected 1 got " + args.length);
@@ -37,6 +35,6 @@ public class CommandCarpetbagData extends CommandBase {
 		} catch (PlayerNotFoundException e) {
 			throw new CommandException(TextFormatting.RED + "Player not found. Please check your spelling and try again.");
 		}
-		sender.sendMessage(new TextComponentString(TextFormatting.YELLOW + args[0] + "'s CarpetbagData" + player.getEntityData()));
+		sender.sendMessage(new TextComponentString(TextFormatting.YELLOW + args[0] + "'s CarpetbagData:" + CPBCapabilityManager.asCarpetbagPlayer(player).toString()));
 	}
 }

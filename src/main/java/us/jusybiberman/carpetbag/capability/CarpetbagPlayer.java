@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -71,6 +72,13 @@ public class CarpetbagPlayer implements ICarpetbagPlayer {
 
 		EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(playerId);
 		NetworkHandler.INSTANCE.sendTo(new S2CSyncCarpetbagCapMsg(this), player);
+	}
+
+	@Override
+	public String toString() {
+		return  TextFormatting.YELLOW + "Mana: " + manaStorage.serializeNBT() + "\n" +
+				TextFormatting.YELLOW + "Skills: " + skillStorage.serializeNBT() + "\n" +
+				TextFormatting.YELLOW + "Stat: " + statStorage.serializeNBT() + "\n";
 	}
 
 	public static class Serializer extends SyncableStorage<ICarpetbagPlayer, CarpetbagPlayer> {
