@@ -19,7 +19,7 @@ public class CommandCarpetbagData extends CommandBase {
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "carpetbagdata";
+		return "/carpetbagdata";
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class CommandDeleteDungeon extends CommandBase {
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "deletedungeon <dimension_id>";
+		return "/deletedungeon <dimension_id>";
 	}
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
