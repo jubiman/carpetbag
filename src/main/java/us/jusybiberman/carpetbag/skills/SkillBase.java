@@ -1,9 +1,6 @@
 package us.jusybiberman.carpetbag.skills;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import us.jusybiberman.carpetbag.Carpetbag;
 
 public class SkillBase {
 	// TODO: save exp as total exp? then maybe make it a long? or prestiges?
@@ -36,7 +33,7 @@ public class SkillBase {
 	}
 
 	public boolean levelUp() {
-		if(exp > threshold) {
+		if(exp >= threshold) {
 			threshold = nextThreshold();
 			return true;
 		}

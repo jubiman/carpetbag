@@ -9,18 +9,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.api.capability.ICarpetbagPlayer;
 import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
-import us.jusybiberman.carpetbag.capability.CarpetbagPlayer;
+import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 
 import javax.annotation.Nonnull;
-import java.util.Iterator;
 
 public class ContainerTatara extends Container {
 	private final TileEntityTatara tileTatara;
@@ -102,23 +101,43 @@ public class ContainerTatara extends Container {
 
 	@Nonnull
 	@Override
-	public ItemStack transferStackInSlot(@Nonnull EntityPlayer player, int index)
-	{
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer player, int index) {
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
 
-		if(slot != null && slot.getHasStack())
-		{
+		if(slot != null && slot.getHasStack()) {
 			ItemStack stack1 = slot.getStack();
 			stack = stack1.copy();
 
-			if(index < 3)
-			{
-				if(!mergeItemStack(stack1, 3, this.inventorySlots.size(), true))
+			if(index == 2) {// Clicked in the tatara somewhere
+				if (!mergeItemStack(stack1, 3, this.inventorySlots.size(), true)) return ItemStack.EMPTY;
+				giveExp(stack1);
+			}
+			else if (index > 2) {
+				// if it can be smelted, place in the input slots
+				if (CraftingManagerTatara.getInstance().getSmeltingRecipe(stack1) != null) {
+					// try to place in either Input slot; add 1 to final input slot because mergeItemStack uses < index
+					if (!mergeItemStack(stack1, 0, 1, false))
+						return ItemStack.EMPTY;
+				}
+				// if it's an energy source, place in Fuel slot
+				else if (ProviderTatara.isItemFuel(stack1)) {
+					if (!mergeItemStack(stack1, 1, 2, false))
+						return ItemStack.EMPTY;
+				}
+				// item in player's inventory, but not in action bar
+				else if (index < 30) {
+					// place in action bar
+					if (!mergeItemStack(stack1, 30, 39, false))
+						return ItemStack.EMPTY;
+				}
+				// item in action bar - place in player inventory
+				else if (index < 39 && !mergeItemStack(stack1, 3, 30, false))
 					return ItemStack.EMPTY;
 			}
-			else if(!mergeItemStack(stack1, 0, 3, false))
+			else if(!mergeItemStack(stack1, 3, 39, false)) // Try to merge from tatara inv to player inv
 				return ItemStack.EMPTY;
+
 
 
 			if(stack1.getCount() == 0)
@@ -129,29 +148,32 @@ public class ContainerTatara extends Container {
 		return stack;
 	}
 
+	private void giveExp(ItemStack stack) {
+		ICarpetbagPlayer p = CPBCapabilityManager.asCarpetbagPlayer(player);
+		boolean lvlup = false;
+		switch (stack.getItem().getRegistryName().toString()) {
+			case "carpetbag:kera":
+				lvlup = p.getSkillStorage().getSkill("smithing").addExp(100L * stack.getCount());
+				break;
+			case "carpetbag:hocho_tetsu_heated":
+			case "carpetbag:tamahagane_heated":
+				lvlup = p.getSkillStorage().getSkill("smithing").addExp(300L * stack.getCount());
+				break;
+			case "carpetbag:tamahagane_reheated":
+				lvlup = p.getSkillStorage().getSkill("smithing").addExp(700L * stack.getCount());
+				break;
+		}
+		if (lvlup)
+			player.sendMessage(new TextComponentString("Your smithing skill leveled up to level " + p.getSkillStorage().getSkill("smithing").getLevel()));
+	}
+
 	@Nonnull
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, @Nonnull ClickType clickTypeIn, @Nonnull EntityPlayer player) {
 		if (slotId == 2) {
 			ItemStack stack = this.inventorySlots.get(2).getStack();
-			if (this.inventorySlots.get(2).getHasStack()) {
-				ICarpetbagPlayer p = CPBCapabilityManager.asCarpetbagPlayer(player);
-				boolean lvlup = false;
-				switch (stack.getItem().getRegistryName().toString()) {
-					case "carpetbag:kera":
-						lvlup = p.getSkillStorage().getSkill("smithing").addExp(100L * stack.getCount());
-						break;
-					case "carpetbag:hocho_tetsu_heated":
-					case "carpetbag:tamahagane_heated":
-						lvlup = p.getSkillStorage().getSkill("smithing").addExp(300L * stack.getCount());
-						break;
-					case "carpetbag:tamahagane_reheated":
-						lvlup = p.getSkillStorage().getSkill("smithing").addExp(700L * stack.getCount());
-						break;
-				}
-				if (lvlup)
-					player.sendMessage(new TextComponentString("Your smithing skill leveled up to level " + p.getSkillStorage().getSkill("smithing").getLevel()));
-			}
+			if (this.inventorySlots.get(2).getHasStack() && (clickTypeIn == ClickType.PICKUP || clickTypeIn == ClickType.PICKUP_ALL) && FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+				giveExp(stack);
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
