@@ -1,19 +1,12 @@
-package us.jusybiberman.carpetbag.item;
+package us.jusybiberman.carpetbag.init;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import us.jusybiberman.carpetbag.Carpetbag;
-import us.jusybiberman.carpetbag.block.ModBlocks;
+import us.jusybiberman.carpetbag.item.ItemMaterial;
 import us.jusybiberman.carpetbag.item.swords.OnimaruKunitsuna;
 
-import java.util.List;
-
 import static us.jusybiberman.carpetbag.Carpetbag.MOD_ID;
-import static us.jusybiberman.carpetbag.material.Materials.*;
 
 @GameRegistry.ObjectHolder(MOD_ID)
 public class ModItems {

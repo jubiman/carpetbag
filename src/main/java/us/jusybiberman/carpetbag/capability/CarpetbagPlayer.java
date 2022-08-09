@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import us.jusybiberman.carpetbag.api.capability.*;
 import us.jusybiberman.carpetbag.network.NetworkHandler;
-import us.jusybiberman.carpetbag.network.S2CSyncCarpetbagCapMsg;
+import us.jusybiberman.carpetbag.network.message.S2CSyncCarpetbagCapMsg;
 import us.jusybiberman.carpetbag.util.exceptions.WrongSideException;
 
 import javax.annotation.Nullable;

@@ -60,6 +60,7 @@ public class BlockTatara extends BlockContainerBase implements IHasVariants {
 
 		if (tile != null) {
 			if (tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+				// TODO: fix this to where it gets sent to a person's lost and found or smth
 				InvUtils.ejectInventoryContents(world, pos, tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
 				world.updateComparatorOutputLevel(pos, this);
 			}
