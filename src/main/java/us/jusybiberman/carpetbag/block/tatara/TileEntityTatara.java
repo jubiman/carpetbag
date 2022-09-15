@@ -38,21 +38,11 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	private NBTTagCompound compound = new NBTTagCompound();
 
 	public void createProvider(EntityPlayer player) {
-		Carpetbag.getLogger().debug(compound);
-		for (String k : compound.getKeySet()) {
-			UUID id;
-			try {
-				id = UUID.fromString(k);
-			} catch (Exception e) { continue; }
-
-			// Read NBT data if player already used this tatara
-			Carpetbag.getLogger().debug(player.getUniqueID().equals(id));
-			if (player.getUniqueID().equals(id)) {
-				ProviderTatara p = new ProviderTatara(this, player);
-				p.readDataFromNBT(compound.getCompoundTag(k));
-				providers.put(id, p);
-				return;
-			}
+		if (compound.hasKey(player.getUniqueID().toString())) {
+			ProviderTatara p = new ProviderTatara(this, player);
+			p.readDataFromNBT(compound.getCompoundTag(player.getUniqueID().toString()));
+			providers.put(player.getUniqueID(), p);
+			return;
 		}
 		providers.put(player.getUniqueID(), new ProviderTatara(this, player));
 	}
