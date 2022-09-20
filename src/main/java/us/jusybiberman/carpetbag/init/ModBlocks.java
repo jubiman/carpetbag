@@ -1,6 +1,8 @@
-package us.jusybiberman.carpetbag.block;
+package us.jusybiberman.carpetbag.init;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import us.jusybiberman.carpetbag.block.BlockIronSand;
+import us.jusybiberman.carpetbag.block.BlockKera;
 import us.jusybiberman.carpetbag.block.tatara.BlockTatara;
 
 import static us.jusybiberman.carpetbag.Carpetbag.MOD_ID;

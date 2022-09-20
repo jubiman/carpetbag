@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.interaction.jei.wrapper.SmeltingRecipeWrapper;
-import us.jusybiberman.carpetbag.item.ModItems;
+import us.jusybiberman.carpetbag.init.ModItems;
 
 import javax.annotation.Nonnull;
 

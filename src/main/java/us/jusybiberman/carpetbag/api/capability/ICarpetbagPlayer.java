@@ -23,4 +23,6 @@ public interface ICarpetbagPlayer {
 	 * @throws WrongSideException if called on client.
 	 */
 	void sendUpdates();
+	@Override
+	String toString();
 }

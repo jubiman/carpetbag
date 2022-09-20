@@ -15,7 +15,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import us.jusybiberman.carpetbag.block.ModBlocks;
+import us.jusybiberman.carpetbag.init.ModBlocks;
 import us.jusybiberman.carpetbag.client.gui.GuiTatara;
 import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;

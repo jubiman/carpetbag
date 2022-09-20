@@ -1,33 +1,13 @@
 package us.jusybiberman.carpetbag.block.tatara;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.management.PlayerInteractionManager;
-import net.minecraft.tileentity.TileEntity;
 
-import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.server.FMLServerHandler;
-import net.minecraftforge.items.IItemHandler;
-import us.jusybiberman.carpetbag.Carpetbag;
-import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
-import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
-import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;
-import us.jusybiberman.carpetbag.item.ModItems;
 import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
-import us.jusybiberman.carpetbag.tileentity.SimpleItemStackHandler;
 import us.jusybiberman.carpetbag.tileentity.TileEntityBase;
 
 import java.util.HashMap;
@@ -38,11 +18,19 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	private NBTTagCompound compound = new NBTTagCompound();
 
 	public void createProvider(EntityPlayer player) {
-		if (compound.hasKey(player.getUniqueID().toString())) {
-			ProviderTatara p = new ProviderTatara(this, player);
-			p.readDataFromNBT(compound.getCompoundTag(player.getUniqueID().toString()));
-			providers.put(player.getUniqueID(), p);
-			return;
+		for (String k : compound.getKeySet()) {
+			UUID id;
+			try {
+				id = UUID.fromString(k);
+			} catch (Exception e) { continue; }
+
+			// Read NBT data if player already used this tatara
+			if (player.getUniqueID().equals(id)) {
+				ProviderTatara p = new ProviderTatara(this, player);
+				p.readDataFromNBT(compound.getCompoundTag(k));
+				providers.put(id, p);
+				return;
+			}
 		}
 		providers.put(player.getUniqueID(), new ProviderTatara(this, player));
 	}
@@ -125,7 +113,6 @@ public class TileEntityTatara extends TileEntityBase implements ITickable {
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound) {
 		// We read the data when a provider is created
-		Carpetbag.getLogger().debug(compound);
 		this.compound = compound;
 	}
 }

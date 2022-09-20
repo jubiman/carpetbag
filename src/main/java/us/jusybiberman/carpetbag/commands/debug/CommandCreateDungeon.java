@@ -26,7 +26,7 @@ public class CommandCreateDungeon extends CommandBase {
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "createdungeon <dimension_id> [players_to_teleport...]";
+		return "/createdungeon <dimension_id> [players_to_teleport...]";
 	}
 
 	@Override

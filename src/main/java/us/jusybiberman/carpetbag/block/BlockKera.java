@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.item.CarpetbagTab;
-import us.jusybiberman.carpetbag.item.ModItems;
+import us.jusybiberman.carpetbag.init.ModItems;
 
 import java.util.Random;
 

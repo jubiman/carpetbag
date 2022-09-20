@@ -18,7 +18,7 @@ public class CommandSkillExp extends CommandBase {
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "skillxp <add|remove|set> <skill_type> <amount>";
+		return "/skillxp <add|remove|set> <skill_type> <amount>";
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package us.jusybiberman.carpetbag.network;
+package us.jusybiberman.carpetbag.network.message;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

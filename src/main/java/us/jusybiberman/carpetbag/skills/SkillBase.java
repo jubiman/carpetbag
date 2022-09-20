@@ -1,9 +1,6 @@
 package us.jusybiberman.carpetbag.skills;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import us.jusybiberman.carpetbag.Carpetbag;
 
 public class SkillBase {
 	// TODO: save exp as total exp? then maybe make it a long? or prestiges?
@@ -36,7 +33,7 @@ public class SkillBase {
 	}
 
 	public boolean levelUp() {
-		if(exp > threshold) {
+		if(exp >= threshold) {
 			threshold = nextThreshold();
 			return true;
 		}
@@ -57,7 +54,7 @@ public class SkillBase {
 		// TODO: decide whether to take this formula or a different one
 		// http://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
 		int x = getLevel() + 1;
-		return 250 * ((long) x * x) - (250L * x);
+		return 250L * ((long) x * x) - (250L * x);
 	}
 
 	public NBTTagCompound save() {
