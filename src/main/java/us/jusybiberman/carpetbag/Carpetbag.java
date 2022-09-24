@@ -104,6 +104,7 @@ public class Carpetbag {
 		registerEventListeners();
 		registerOreDicts();
 		registerRecipes();
+		proxy.registerKeybinds();
 
 		ModInteractions.init(event);
 	}

@@ -41,6 +41,6 @@ public abstract class BlockContainerBase extends BlockBase
 	{
 		super.eventReceived(state, worldIn, pos, id, param);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
-		return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
+		return tileentity != null && tileentity.receiveClientEvent(id, param);
 	}
 }
