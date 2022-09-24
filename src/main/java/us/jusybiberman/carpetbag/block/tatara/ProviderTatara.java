@@ -1,71 +1,42 @@
 package us.jusybiberman.carpetbag.block.tatara;
 
 import com.google.common.collect.Lists;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.common.capabilities.Capability;
-import us.jusybiberman.carpetbag.api.capability.ICarpetbagPlayer;
-import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
+import us.jusybiberman.carpetbag.api.TileInventoryProvider;
 import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;
-import us.jusybiberman.carpetbag.item.ModItems;
-import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
+import us.jusybiberman.carpetbag.init.ModItems;
 
-public class ProviderTatara {
+public class ProviderTatara extends TileInventoryProvider<TileEntityTatara> {
 	public int furnaceBurnTime;
 	public int currentItemBurnTime;
 	public int cookTime;
 	public int totalCookTime;
 
-	public PlayerSideItemStackHandler inventory = createItemStackHandler();
-
-	private final TileEntityTatara tile;
-	private final ICarpetbagPlayer player;
-
 	public ProviderTatara(TileEntityTatara tileEntityTatara, EntityPlayer p) {
-		tile = tileEntityTatara;
-		player = CPBCapabilityManager.asCarpetbagPlayer(p);
+		super(tileEntityTatara, p, 3);
 	}
 
-	public PlayerSideItemStackHandler createItemStackHandler() {
-		return new PlayerSideItemStackHandler(true, 3);
-	}
-
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return true;
-		return tile.hasCapability(capability, facing);
-	}
-
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return (T) inventory;
-		return tile.getCapability(capability, facing);
-	}
-
+	@Override
 	public void writeDataToNBT(NBTTagCompound compound) {
-		compound.merge(inventory.serializeNBT());
+		super.writeDataToNBT(compound);
 
 		compound.setInteger("BurnTime", this.furnaceBurnTime);
 		compound.setInteger("CookTime", this.cookTime);
 		compound.setInteger("CookTimeTotal", this.totalCookTime);
 	}
 
+	@Override
 	public void readDataFromNBT(NBTTagCompound compound) {
-		inventory = createItemStackHandler();
-		inventory.deserializeNBT(compound);
+		super.readDataFromNBT(compound);
 
 		this.furnaceBurnTime = compound.getInteger("BurnTime");
 		this.cookTime = compound.getInteger("CookTime");
 		this.totalCookTime = compound.getInteger("CookTimeTotal");
 		this.currentItemBurnTime = getItemBurnTime(this.inventory.getStackInSlot(1));
-
 	}
 
 

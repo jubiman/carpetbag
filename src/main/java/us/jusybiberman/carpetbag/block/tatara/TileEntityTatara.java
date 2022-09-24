@@ -9,44 +9,34 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
 import us.jusybiberman.carpetbag.tileentity.TileEntityBase;
+import us.jusybiberman.carpetbag.tileentity.TileEntityWithProviders;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class TileEntityTatara extends TileEntityBase implements ITickable {
+public class TileEntityTatara extends TileEntityWithProviders<ProviderTatara, TileEntityTatara> implements ITickable {
 	private final HashMap<UUID, ProviderTatara> providers = new HashMap<>();
 	private NBTTagCompound compound = new NBTTagCompound();
 
-	public void createProvider(EntityPlayer player) {
-		for (String k : compound.getKeySet()) {
-			UUID id;
-			try {
-				id = UUID.fromString(k);
-			} catch (Exception e) { continue; }
+	public TileEntityTatara() {
+		super(ProviderTatara.class, TileEntityTatara.class);
+	}
 
-			// Read NBT data if player already used this tatara
-			if (player.getUniqueID().equals(id)) {
-				ProviderTatara p = new ProviderTatara(this, player);
-				p.readDataFromNBT(compound.getCompoundTag(k));
-				providers.put(id, p);
-				return;
-			}
+	/*public void createProvider(EntityPlayer player) {
+		if (compound.hasKey(player.getUniqueID().toString())) {
+			ProviderTatara p = new ProviderTatara(this, player);
+			p.readDataFromNBT(compound.getCompoundTag(player.getUniqueID().toString()));
+			providers.put(player.getUniqueID(), p);
+			return;
 		}
 		providers.put(player.getUniqueID(), new ProviderTatara(this, player));
-	}
+	}*/
 
 	public PlayerSideItemStackHandler getInventory(EntityPlayer player) {
 		if (!providers.containsKey(player.getUniqueID()))
 			createProvider(player);
 		return providers.get(player.getUniqueID()).inventory;
 	}
-
-	public ProviderTatara getProvider(EntityPlayer player) {
-		if (!providers.containsKey(player.getUniqueID()))
-			createProvider(player);
-		return providers.get(player.getUniqueID());
-	}
-
 
 	public boolean isValidStructure()
 	{

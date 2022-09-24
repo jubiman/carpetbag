@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import us.jusybiberman.carpetbag.Carpetbag;
+import us.jusybiberman.carpetbag.network.message.S2CSyncCarpetbagCapMsg;
 
 public class NetworkHandler {
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Carpetbag.MOD_ID + "_channel");
