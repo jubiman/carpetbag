@@ -5,12 +5,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
-import us.jusybiberman.carpetbag.api.TileInventoryProvider;
+import us.jusybiberman.carpetbag.api.TileTickableInventoryProvider;
 import us.jusybiberman.carpetbag.crafting.manager.CraftingManagerTatara;
 import us.jusybiberman.carpetbag.crafting.recipes.SmeltingRecipe;
 import us.jusybiberman.carpetbag.init.ModItems;
 
-public class ProviderTatara extends TileInventoryProvider<TileEntityTatara> {
+public class ProviderTatara extends TileTickableInventoryProvider<TileEntityTatara> {
 	public int furnaceBurnTime;
 	public int currentItemBurnTime;
 	public int cookTime;
@@ -119,6 +119,7 @@ public class ProviderTatara extends TileInventoryProvider<TileEntityTatara> {
 		return 64;
 	}
 
+	@Override
 	public void update() {
 		boolean burning = this.isBurning();
 		boolean flag1 = false;

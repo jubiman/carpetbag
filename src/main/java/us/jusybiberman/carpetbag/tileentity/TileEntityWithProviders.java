@@ -8,28 +8,33 @@ import us.jusybiberman.carpetbag.api.TileInventoryProvider;
 import us.jusybiberman.carpetbag.block.tatara.ProviderTatara;
 import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
 public abstract class TileEntityWithProviders<T extends TileInventoryProvider, R> extends TileEntityBase {
 	protected final HashMap<UUID, T> providers = new HashMap<>();
-	private NBTTagCompound compound = new NBTTagCompound();
+	protected NBTTagCompound compound = new NBTTagCompound();
 
 	private final Class<T> clazz;
-	private final Class<R> upperclazz;
+	private final Class<R> tile;
 
-	public TileEntityWithProviders(Class<T> impl, Class<R> upper) {
+	public TileEntityWithProviders(Class<T> impl, Class<R> t) {
 		super();
 		clazz = impl;
-		upperclazz = upper;
+		tile = t;
 	}
 	public void createProvider(EntityPlayer player) {
 		T p;
 		try {
-			Carpetbag.getLogger().debug(clazz.getConstructors());
-			p = (T) clazz.getConstructors()[1].newInstance(upperclazz, player);
+			p = clazz.getConstructor(new Class<?>[]{tile, EntityPlayer.class}).newInstance(tile, player);
+			//p = (T) clazz.getConstructors()[0].newInstance(tile, player);
+			Carpetbag.getLogger().debug(p);
+			Carpetbag.getLogger().debug("YEEEES");
 		} catch (Exception e) {
-			Carpetbag.getLogger().error("Failed to create new provider for " + player.getName() + ". " + e);
+			Carpetbag.getLogger().error("Failed to create new provider for " + player.getName() + ". " + e.getMessage());
+			for(StackTraceElement line : e.getStackTrace())
+				Carpetbag.getLogger().error(line);
 			return;
 		}
 		if (compound.hasKey(player.getUniqueID().toString())) {

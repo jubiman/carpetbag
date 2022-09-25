@@ -10,20 +10,17 @@ import net.minecraft.util.ITickable;
 import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
 import us.jusybiberman.carpetbag.tileentity.TileEntityBase;
 import us.jusybiberman.carpetbag.tileentity.TileEntityWithProviders;
+import us.jusybiberman.carpetbag.tileentity.TileEntityWithTickableProviders;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class TileEntityTatara extends TileEntityWithProviders<ProviderTatara, TileEntityTatara> implements ITickable {
-	private final HashMap<UUID, ProviderTatara> providers = new HashMap<>();
-	private NBTTagCompound compound = new NBTTagCompound();
-
+public class TileEntityTatara extends TileEntityWithTickableProviders<ProviderTatara, TileEntityTatara> implements ITickable {
 	public TileEntityTatara() {
 		super(ProviderTatara.class, TileEntityTatara.class);
 	}
 
-	public boolean isValidStructure()
-	{
+	public boolean isValidStructure() {
 		//DON'T ASK QUESTIONS YOU'RE NOT READY
 		for (int z = -1; z <= 1; z++)
 			for (int x = -1; x <= 1; x++)
@@ -42,35 +39,24 @@ public class TileEntityTatara extends TileEntityWithProviders<ProviderTatara, Ti
 		return isHeatSource(world.getBlockState(pos.down())) && hasSiding;
 	}
 
-	public boolean isSiding(IBlockState state)
-	{
+	public boolean isSiding(IBlockState state)	{
 		return state.getBlock() == Blocks.IRON_BLOCK;
 	}
 
-	public boolean isBedding(IBlockState state)
-	{
+	public boolean isBedding(IBlockState state)	{
 		return state.getBlock() == Blocks.CLAY;
 	}
 
-	public boolean isTopping(IBlockState state)
-	{
+	public boolean isTopping(IBlockState state) {
 		return state.getBlock() == Blocks.NETHER_BRICK;
 	}
 
-	public boolean isStoneBrick(IBlockState state)
-	{
+	public boolean isStoneBrick(IBlockState state) {
 		return state.getBlock() == Blocks.STONEBRICK;
 	}
 
-	public boolean isHeatSource(IBlockState state)
-	{
+	public boolean isHeatSource(IBlockState state) {
 		return state.getMaterial() == Material.LAVA || state.getMaterial() == Material.FIRE;
-	}
-
-	@Override
-	public void update() {
-		for (UUID k : providers.keySet())
-			providers.get(k).update();
 	}
 
 	@Override
