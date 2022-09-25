@@ -3,6 +3,8 @@ package us.jusybiberman.carpetbag.client;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import us.jusybiberman.carpetbag.client.gui.GuiPlayerMenu;
+import us.jusybiberman.carpetbag.client.gui.GuiTatara;
 import us.jusybiberman.carpetbag.lib.GuiIds;
 
 import java.lang.reflect.Constructor;
@@ -30,48 +32,12 @@ public class GuiHandler implements IGuiHandler
 	}
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-	{
-		for (GuiContainerConnection registered : GuiContainerConnection.values())
-		{
-			if (ID == registered.guiID)
-			{
-				Class containerClass = null;
-				try
-				{
-					containerClass = Class.forName(registered.containerClass);
-				}
-				catch (ClassNotFoundException e)
-				{
-					e.printStackTrace();
-				}
-
-				if (containerClass != null)
-				{
-					Constructor constructor = null;
-					try
-					{
-						constructor = containerClass.getConstructor(EntityPlayer.class, World.class, int.class, int.class, int.class);
-					}
-					catch (NoSuchMethodException | SecurityException e)
-					{
-						e.printStackTrace();
-					}
-
-					if (constructor != null)
-					{
-						try
-						{
-							return constructor.newInstance(player, world, x, y, z);
-						}
-						catch (InstantiationException | IllegalAccessException | IllegalArgumentException |
-							   InvocationTargetException e)
-						{
-							e.printStackTrace();
-						}
-					}
-				}
-			}
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		switch(ID) {
+			case GuiIds.TATARA:
+				return new GuiTatara(player, world, x, y, z);
+			case GuiIds.PLAYER_MENU:
+				return new GuiPlayerMenu();
 		}
 		return null;
 	}
@@ -79,47 +45,11 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		for (GuiContainerConnection registered : GuiContainerConnection.values())
-		{
-			if (ID == registered.guiID)
-			{
-				Class guiClass = null;
-				try
-				{
-					guiClass = Class.forName(registered.guiClass);
-				}
-				catch (ClassNotFoundException e)
-				{
-					e.printStackTrace();
-				}
-
-				if (guiClass != null)
-				{
-
-					Constructor constructor = null;
-					try
-					{
-						constructor = guiClass.getConstructor(EntityPlayer.class, World.class, int.class, int.class, int.class);
-					}
-					catch (NoSuchMethodException | SecurityException e)
-					{
-						e.printStackTrace();
-					}
-
-					if (constructor != null)
-					{
-						try
-						{
-							return constructor.newInstance(player, world, x, y, z);
-						}
-						catch (InstantiationException | IllegalAccessException | IllegalArgumentException |
-							   InvocationTargetException e)
-						{
-							e.printStackTrace();
-						}
-					}
-				}
-			}
+		switch(ID) {
+			case GuiIds.TATARA:
+				return new GuiTatara(player, world, x, y, z);
+			case GuiIds.PLAYER_MENU:
+				return new GuiPlayerMenu();
 		}
 		return null;
 	}
