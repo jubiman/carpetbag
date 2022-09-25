@@ -9,7 +9,7 @@ import us.jusybiberman.carpetbag.api.capability.ICarpetbagPlayer;
 import us.jusybiberman.carpetbag.capability.CPBCapabilityManager;
 import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
 
-public class TileInventoryProvider<T extends TileEntity> {
+public abstract class TileInventoryProvider<T extends TileEntity> {
 
 	public PlayerSideItemStackHandler inventory;
 

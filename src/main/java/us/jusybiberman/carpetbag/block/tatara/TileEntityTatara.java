@@ -22,22 +22,6 @@ public class TileEntityTatara extends TileEntityWithProviders<ProviderTatara, Ti
 		super(ProviderTatara.class, TileEntityTatara.class);
 	}
 
-	/*public void createProvider(EntityPlayer player) {
-		if (compound.hasKey(player.getUniqueID().toString())) {
-			ProviderTatara p = new ProviderTatara(this, player);
-			p.readDataFromNBT(compound.getCompoundTag(player.getUniqueID().toString()));
-			providers.put(player.getUniqueID(), p);
-			return;
-		}
-		providers.put(player.getUniqueID(), new ProviderTatara(this, player));
-	}*/
-
-	public PlayerSideItemStackHandler getInventory(EntityPlayer player) {
-		if (!providers.containsKey(player.getUniqueID()))
-			createProvider(player);
-		return providers.get(player.getUniqueID()).inventory;
-	}
-
 	public boolean isValidStructure()
 	{
 		//DON'T ASK QUESTIONS YOU'RE NOT READY

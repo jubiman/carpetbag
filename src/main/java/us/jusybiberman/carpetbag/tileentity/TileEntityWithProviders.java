@@ -2,9 +2,11 @@ package us.jusybiberman.carpetbag.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
 import us.jusybiberman.carpetbag.Carpetbag;
 import us.jusybiberman.carpetbag.api.TileInventoryProvider;
 import us.jusybiberman.carpetbag.block.tatara.ProviderTatara;
+import us.jusybiberman.carpetbag.storage.PlayerSideItemStackHandler;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -42,5 +44,11 @@ public abstract class TileEntityWithProviders<T extends TileInventoryProvider, R
 		if (!providers.containsKey(player.getUniqueID()))
 			createProvider(player);
 		return providers.get(player.getUniqueID());
+	}
+
+	public PlayerSideItemStackHandler getInventory(EntityPlayer player) {
+		if (!providers.containsKey(player.getUniqueID()))
+			createProvider(player);
+		return providers.get(player.getUniqueID()).inventory;
 	}
 }
